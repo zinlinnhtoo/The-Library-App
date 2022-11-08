@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">The Library App</string>
+    <string name="home_menu_label">Home</string>
+    <string name="library_menu_label">Library</string>
 </resources>

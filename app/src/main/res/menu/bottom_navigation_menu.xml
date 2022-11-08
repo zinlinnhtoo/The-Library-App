@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:title="@string/home_menu_label"
+        android:icon="@drawable/ic_baseline_home_24dp_black"
+        android:iconTint="@color/black"/>
+
+    <item
+        android:id="@+id/action_library"
+        android:title="@string/library_menu_label"
+        android:icon="@drawable/ic_baseline_library_books_24dp_black"/>
+</menu>
