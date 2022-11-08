@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.adapters.BannerBookAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.activity_library.*
 
 class HomeActivity : AppCompatActivity() {
+
+    private lateinit var mBannerBookAdapter: BannerBookAdapter
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -23,6 +26,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setUpBottomNavBar()
+
+        mBannerBookAdapter = BannerBookAdapter()
+        rvBannerBook.adapter = mBannerBookAdapter
+        rvBannerBook.setIntervalRatio(0.8f)
     }
 
     private fun setUpBottomNavBar() {

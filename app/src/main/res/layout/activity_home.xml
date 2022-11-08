@@ -6,14 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Activity"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/rlSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_search_bar"
+            android:background="@drawable/background_search_bar"
+            android:elevation="@dimen/margin_medium_3"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:layout_marginBottom="@dimen/margin_medium_2"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icSearch"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_baseline_search_24dp_black" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_weight="4"
+                android:hint="Search Play Books" />
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rlSearchBar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                    android:id="@+id/rvBannerBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_carousel_banner_book"
+                    android:layout_marginTop="@dimen/margin_medium_2"/>
+
+
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
@@ -22,7 +69,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:theme="@style/Theme.TheLibraryApp.BottomNavigationTheme"
-            app:menu="@menu/bottom_navigation_menu"/>
+            app:menu="@menu/bottom_navigation_menu" />
 
     </RelativeLayout>
 

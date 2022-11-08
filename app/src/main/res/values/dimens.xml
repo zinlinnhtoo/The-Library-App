@@ -28,5 +28,10 @@
     <dimen name="text_big">40sp</dimen>
     <dimen name="text_big_2x">60sp</dimen>
     <dimen name="text_big_3x">80sp</dimen>
+    <dimen name="height_carousel_banner_book">200dp</dimen>
+    <dimen name="width_banner_book">200dp</dimen>
+    <dimen name="background_corner_headphone_and_check">4dp</dimen>
+    <dimen name="corner_search_bar">8dp</dimen>
+    <dimen name="height_search_bar">50dp</dimen>
 
 </resources>
