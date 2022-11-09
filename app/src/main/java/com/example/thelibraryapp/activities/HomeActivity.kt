@@ -10,12 +10,13 @@ import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.BannerBookAdapter
 import com.example.thelibraryapp.adapters.BookCategoryAdapter
 import com.example.thelibraryapp.delegates.BookOptionDelegate
+import com.example.thelibraryapp.delegates.GoToCategoryDelegate
 import com.example.thelibraryapp.dummy.tabList
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 
-class HomeActivity : AppCompatActivity(), BookOptionDelegate {
+class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate {
 
     private lateinit var mBannerBookAdapter: BannerBookAdapter
 
@@ -43,7 +44,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate {
     }
 
     private fun setUpBookCategoryRecyclerView() {
-        mBookCategoryAdapter = BookCategoryAdapter(this)
+        mBookCategoryAdapter = BookCategoryAdapter(this, this)
         rvBookCategory.adapter = mBookCategoryAdapter
         rvBookCategory.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -82,7 +83,6 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate {
     }
 
     override fun onTapBookOption() {
-        Toast.makeText(this, "Tap Option", Toast.LENGTH_SHORT).show()
         val bottomSheetBookOption = BottomSheetBehavior.from(bottomSheetBookOption)
         when {
             bottomSheetBookOption.state != BottomSheetBehavior.STATE_EXPANDED -> {
@@ -92,5 +92,9 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate {
                 bottomSheetBookOption.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
+    }
+
+    override fun onTapCategory() {
+        startActivity(BookCategoryActivity.newIntent(this@HomeActivity))
     }
 }

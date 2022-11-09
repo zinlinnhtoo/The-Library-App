@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_medium_2"
+    android:layout_marginTop="@dimen/margin_medium_2"
+    android:layout_marginBottom="@dimen/margin_medium_2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/flBookInCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBookInCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/book"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivOptionInCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/option_white_24px"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_gravity="end"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvBookTitleInCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flBookInCategory"
+        android:layout_alignStart="@id/flBookInCategory"
+        android:layout_alignEnd="@id/flBookInCategory"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:textSize="@dimen/text_regular_2x"
+        android:textAllCaps="false"
+        android:text="HOTD: Fire &amp; Blood"/>
+
+</RelativeLayout>

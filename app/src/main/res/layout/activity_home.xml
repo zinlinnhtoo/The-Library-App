@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/rlSearchBar"
+                android:id="@+id/llSearchBar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_search_bar"
                 android:layout_marginStart="@dimen/margin_medium_2"
@@ -25,7 +25,7 @@
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:background="@drawable/background_search_bar"
-                android:elevation="@dimen/margin_medium_3"
+                android:elevation="@dimen/margin_medium"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
