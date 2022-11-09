@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_medium_2"
+    android:layout_marginBottom="@dimen/margin_medium_2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llCategoryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCategoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Ebooks for you"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_regular_2x"
+            android:layout_weight="4"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivForwardArrow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24dp_color_accent"
+            android:layout_weight="1"/>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBookList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_below="@id/llCategoryTitle"
+        android:clipToPadding="false"
+        android:paddingEnd="@dimen/margin_medium_2"
+        tools:ignore="RtlSymmetry" />
+
+</RelativeLayout>

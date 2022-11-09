@@ -66,6 +66,32 @@
                     android:layout_height="@dimen/height_carousel_banner_book"
                     android:layout_marginTop="@dimen/margin_medium_2"/>
 
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayoutBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rvBannerBook"
+                    android:layout_marginTop="@dimen/margin_medium_2"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    android:background="@color/colorPrimary"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/colorAccent"
+                    app:tabTextColor="@color/black"
+                    app:tabGravity="fill"
+                    app:tabMaxWidth="0dp"
+                    app:tabTextAppearance="@style/TabTextAppearance"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBookCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tabLayoutBook"
+                    android:layout_marginTop="@dimen/margin_medium_2"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginBottom="@dimen/margin_xxlarge"/>
+
 
             </RelativeLayout>
 

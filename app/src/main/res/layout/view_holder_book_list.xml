@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_medium_2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/flBook"
+        android:layout_width="130dp"
+        android:layout_height="200dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/book"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/option_white_24px"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_gravity="end"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvBookTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flBook"
+        android:layout_alignStart="@id/flBook"
+        android:layout_alignEnd="@id/flBook"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:textSize="@dimen/text_regular_2x"
+        android:textAllCaps="false"
+        android:text="HOTD: Fire &amp; Blood"/>
+
+</RelativeLayout>
