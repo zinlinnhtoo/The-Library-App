@@ -9,8 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:elevation="0dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
@@ -20,29 +20,29 @@
                 android:id="@+id/rlSearchBar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_search_bar"
-                android:background="@drawable/background_search_bar"
-                android:elevation="@dimen/margin_medium_3"
                 android:layout_marginStart="@dimen/margin_medium_2"
                 android:layout_marginTop="@dimen/margin_medium_2"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:layout_marginBottom="@dimen/margin_medium_2"
+                android:background="@drawable/background_search_bar"
+                android:elevation="@dimen/margin_medium_3"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/icSearch"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     app:srcCompat="@drawable/ic_baseline_search_24dp_black" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSearch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@null"
                     android:layout_weight="4"
+                    android:background="@null"
                     android:hint="Search Play Books" />
 
             </LinearLayout>
@@ -51,60 +51,64 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                android:id="@+id/rvBannerBook"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/height_carousel_banner_book"
+                android:layout_marginTop="@dimen/margin_medium_2" />
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
-                    android:id="@+id/rvBannerBook"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_carousel_banner_book"
-                    android:layout_marginTop="@dimen/margin_medium_2"/>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rvBannerBook"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:background="@color/colorPrimary"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextAppearance="@style/TabTextAppearance"
+                app:tabTextColor="@color/black" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayoutBook"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rvBannerBook"
-                    android:layout_marginTop="@dimen/margin_medium_2"
-                    android:layout_marginStart="@dimen/margin_medium_2"
-                    android:layout_marginEnd="@dimen/margin_medium_2"
-                    android:background="@color/colorPrimary"
-                    app:tabIndicatorColor="@color/colorAccent"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/colorAccent"
-                    app:tabTextColor="@color/black"
-                    app:tabGravity="fill"
-                    app:tabMaxWidth="0dp"
-                    app:tabTextAppearance="@style/TabTextAppearance"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvBookCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tabLayoutBook"
-                    android:layout_marginTop="@dimen/margin_medium_2"
-                    android:layout_marginStart="@dimen/margin_medium_2"
-                    android:layout_marginBottom="@dimen/margin_xxlarge"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBookCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tabLayoutBook"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginBottom="@dimen/margin_xxlarge" />
 
 
-            </RelativeLayout>
+        </RelativeLayout>
 
 
-        </androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            android:theme="@style/Theme.TheLibraryApp.BottomNavigationTheme"
-            app:menu="@menu/bottom_navigation_menu" />
+    <include
+        android:id="@+id/bottomSheetBookOption"
+        layout="@layout/bottomsheet_book_option" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:theme="@style/Theme.TheLibraryApp.BottomNavigationTheme"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

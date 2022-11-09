@@ -4,18 +4,18 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.BannerBookAdapter
 import com.example.thelibraryapp.adapters.BookCategoryAdapter
+import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.dummy.tabList
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
-import kotlinx.android.synthetic.main.activity_library.*
-import kotlinx.android.synthetic.main.view_holder_book_category.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), BookOptionDelegate {
 
     private lateinit var mBannerBookAdapter: BannerBookAdapter
 
@@ -37,9 +37,16 @@ class HomeActivity : AppCompatActivity() {
 
         setUpBookTabLayout()
 
-        mBookCategoryAdapter = BookCategoryAdapter()
+        setUpBookCategoryRecyclerView()
+
+
+    }
+
+    private fun setUpBookCategoryRecyclerView() {
+        mBookCategoryAdapter = BookCategoryAdapter(this)
         rvBookCategory.adapter = mBookCategoryAdapter
-        rvBookCategory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBookCategory.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun setUpBookTabLayout() {
@@ -70,6 +77,19 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
                 true
+            }
+        }
+    }
+
+    override fun onTapBookOption() {
+        Toast.makeText(this, "Tap Option", Toast.LENGTH_SHORT).show()
+        val bottomSheetBookOption = BottomSheetBehavior.from(bottomSheetBookOption)
+        when {
+            bottomSheetBookOption.state != BottomSheetBehavior.STATE_EXPANDED -> {
+                bottomSheetBookOption.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+            else -> {
+                bottomSheetBookOption.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
     }

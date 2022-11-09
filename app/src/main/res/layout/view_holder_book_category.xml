@@ -31,7 +31,6 @@
             android:layout_weight="1"/>
 
 
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView

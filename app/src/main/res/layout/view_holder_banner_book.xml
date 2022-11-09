@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginBottom="@dimen/margin_medium"
-        app:srcCompat="@drawable/ic_baseline_check_24dp_white"
+        app:srcCompat="@drawable/ic_baseline_check_mark_24dp_white"
         android:background="@drawable/background_round_corner_black"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>

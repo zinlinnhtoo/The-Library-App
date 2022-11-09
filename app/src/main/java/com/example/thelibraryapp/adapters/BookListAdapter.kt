@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.views.viewholders.BookListViewHolder
 
-class BookListAdapter: Adapter<BookListViewHolder>() {
+class BookListAdapter(private val mOptionDelegate: BookOptionDelegate): Adapter<BookListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_book_list, parent, false)
-        return BookListViewHolder(view)
+        return BookListViewHolder(view, mOptionDelegate)
     }
 
     override fun onBindViewHolder(holder: BookListViewHolder, position: Int) {

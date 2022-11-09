@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    style="?attr/bottomSheetStyle"
+    android:background="#800E0E0E"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    android:elevation="@dimen/margin_large"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_marginTop="300dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBottomSheetBook"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/book"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBottomSheetBookTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/ivBottomSheetBook"
+            android:layout_alignTop="@id/ivBottomSheetBook"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_regular_2x"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:textColor="@color/black"
+            android:text="House of The Dragon: Fire &amp; Blood"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBottomSheetBookAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvBottomSheetBookTitle"
+            android:layout_alignStart="@id/tvBottomSheetBookTitle"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="George R.R. Martin. Ebook"/>
+
+        <View
+            android:id="@+id/horizontalSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/ivBottomSheetBook"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/horizontalSeparator"
+            android:layout_marginBottom="@dimen/margin_xxlarge"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDownload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_outline_file_download_24dp_black"
+                    android:layout_marginEnd="@dimen/margin_xlarge"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDownload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Download"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_regular_3x"
+                    android:textColor="@color/black"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/delete"
+                    android:layout_marginEnd="@dimen/margin_xlarge"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Delete from your library"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_regular_3x"
+                    android:textColor="@color/black"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivAddToShelves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_baseline_add_24dp_black"
+                    android:layout_marginEnd="@dimen/margin_xlarge"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAddToShelves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Add to shelves..."
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_regular_3x"
+                    android:textColor="@color/black"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMarkAsRead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_baseline_check_24dp_black"
+                    android:layout_marginEnd="@dimen/margin_xlarge"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMarkAsRead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Mark as read"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_regular_3x"
+                    android:textColor="@color/black"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
