@@ -48,5 +48,9 @@
 
     </RelativeLayout>
 
+    <include
+        android:id="@+id/bottomSheetCategoryBookOption"
+        layout="@layout/bottomsheet_category_book_option" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
