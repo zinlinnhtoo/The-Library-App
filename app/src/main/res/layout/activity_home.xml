@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/llSearchBar"
+            <RelativeLayout
+                android:id="@+id/rlSearchBar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_search_bar"
                 android:layout_marginStart="@dimen/margin_medium_2"
@@ -25,27 +25,36 @@
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:background="@drawable/background_search_bar"
-                android:elevation="@dimen/margin_medium"
-                android:orientation="horizontal"
-                android:weightSum="5">
+                android:elevation="@dimen/margin_medium">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/icSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
                     app:srcCompat="@drawable/ic_baseline_search_24dp_black" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSearch"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@id/icSearch"
                     android:background="@null"
                     android:hint="Search Play Books" />
 
-            </LinearLayout>
+                <com.example.thelibraryapp.views.components.CircularProfileImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    app:srcCompat="@drawable/avatar"/>
+
+            </RelativeLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
 
