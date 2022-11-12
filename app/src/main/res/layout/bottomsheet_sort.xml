@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    style="?attr/bottomSheetStyle"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvViewAs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:text="Sort by"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_regular_3x"/>
+
+    <View
+        android:id="@+id/horizontalSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvViewAs"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:background="@android:color/darker_gray"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/horizontalSeparator"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:layout_marginBottom="@dimen/margin_medium_2" >
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbRecent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recently Opened"/>
+
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"/>
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author"/>
+
+        </RadioGroup>
+
+</RelativeLayout>

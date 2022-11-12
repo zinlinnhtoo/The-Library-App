@@ -1,8 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.thelibraryapp.views.viewpods.YourBooksViewPod xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollChipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_medium_2">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true" />
+
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlSortAndViewAs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/horizontalScrollChipGroup"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_sort_24dp_black"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by: Recent"
+            android:layout_toEndOf="@id/ivSort"
+            android:layout_marginStart="@dimen/margin_small"
+            android:textSize="@dimen/text_regular"
+            android:layout_alignBottom="@id/ivSort"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivViewAs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_outline_view_list_24dp_black"/>
+
+    </RelativeLayout>
 
 </com.example.thelibraryapp.views.viewpods.YourBooksViewPod>
