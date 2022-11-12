@@ -10,6 +10,7 @@ import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.BannerBookAdapter
 import com.example.thelibraryapp.adapters.BookCategoryAdapter
 import com.example.thelibraryapp.delegates.BookOptionDelegate
+import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.GoToCategoryDelegate
 import com.example.thelibraryapp.dummy.tabList
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 
-class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate {
+class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate, BookViewHolderDelegate {
 
     private lateinit var mBannerBookAdapter: BannerBookAdapter
 
@@ -56,7 +57,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     }
 
     private fun setUpBookCategoryRecyclerView() {
-        mBookCategoryAdapter = BookCategoryAdapter(this, this)
+        mBookCategoryAdapter = BookCategoryAdapter(this, this, this)
         rvBookCategory.adapter = mBookCategoryAdapter
         rvBookCategory.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -72,7 +73,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     }
 
     private fun setUpBannerBookCarouselRecyclerView() {
-        mBannerBookAdapter = BannerBookAdapter()
+        mBannerBookAdapter = BannerBookAdapter(this)
         rvBannerBook.adapter = mBannerBookAdapter
         rvBannerBook.setIntervalRatio(0.8f)
     }
@@ -101,5 +102,9 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
 
     override fun onTapCategory() {
         startActivity(BookCategoryActivity.newIntent(this@HomeActivity))
+    }
+
+    override fun onTapBook() {
+        startActivity(BookDetailActivity.newIntent(this))
     }
 }

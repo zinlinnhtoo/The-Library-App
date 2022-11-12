@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.delegates.BookOptionDelegate
+import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.views.viewholders.LibraryLargeGridBookViewHolder
 
 class LibraryLargeGridBookAdapter(
-    private val mOptionDelegate: BookOptionDelegate
+    private val mOptionDelegate: BookOptionDelegate,
+    private val mBookViewHolderDelegate: BookViewHolderDelegate
 ): Adapter<LibraryLargeGridBookViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -16,7 +18,7 @@ class LibraryLargeGridBookAdapter(
         viewType: Int
     ): LibraryLargeGridBookViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_library_large_grid_book, parent, false)
-        return LibraryLargeGridBookViewHolder(view, mOptionDelegate)
+        return LibraryLargeGridBookViewHolder(view, mOptionDelegate, mBookViewHolderDelegate)
     }
 
     override fun onBindViewHolder(holder: LibraryLargeGridBookViewHolder, position: Int) {

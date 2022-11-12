@@ -7,12 +7,13 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.delegates.BookOptionDelegate
+import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.views.viewpods.YourBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_shelf_detail.*
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 
-class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate {
+class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHolderDelegate {
 
     lateinit var mYourBooksViewPod: YourBooksViewPod
 
@@ -41,7 +42,7 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate {
 
     private fun setUpViewPod() {
         mYourBooksViewPod = vpYourBooks as YourBooksViewPod
-        mYourBooksViewPod.setUpYourBooksViewPod(this)
+        mYourBooksViewPod.setUpYourBooksViewPod(this, this)
     }
 
     override fun onTapBookOption() {
@@ -53,5 +54,10 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate {
             startActivity(AddToShelvesActivity.newIntent(this))
             overridePendingTransition(0, 0)
         }
+    }
+
+    override fun onTapBook() {
+        startActivity(BookDetailActivity.newIntent(this))
+        overridePendingTransition(0, 0)
     }
 }

@@ -9,13 +9,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.CategoryBookListAdapter
+import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.CategoryBookOptionDelegate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_book_category.*
 import kotlinx.android.synthetic.main.activity_home.*
 
-class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate {
+class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate, BookViewHolderDelegate {
 
     private lateinit var mCategoryBookListAdapter: CategoryBookListAdapter
 
@@ -41,7 +42,7 @@ class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate {
     }
 
     private fun setUpRecyclerView() {
-        mCategoryBookListAdapter = CategoryBookListAdapter(this)
+        mCategoryBookListAdapter = CategoryBookListAdapter(this, this)
         rvCategoryBookList.adapter = mCategoryBookListAdapter
         rvCategoryBookList.layoutManager = GridLayoutManager(this, 2)
     }
@@ -54,5 +55,9 @@ class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate {
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.bottomsheet_category_book_option)
         dialog.show()
+    }
+
+    override fun onTapBook() {
+        startActivity(BookDetailActivity.newIntent(this))
     }
 }
