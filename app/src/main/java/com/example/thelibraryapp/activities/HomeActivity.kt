@@ -13,6 +13,7 @@ import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.GoToCategoryDelegate
 import com.example.thelibraryapp.dummy.tabList
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 
@@ -40,7 +41,12 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
 
         setUpBookCategoryRecyclerView()
 
+    }
 
+    private fun showBottomSheetDialog() {
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(R.layout.bottomsheet_book_option)
+        dialog.show()
     }
 
     private fun setUpBookCategoryRecyclerView() {
@@ -83,16 +89,9 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     }
 
     override fun onTapBookOption() {
-        val bottomSheetBookOption = BottomSheetBehavior.from(bottomSheetBookOption)
-        when {
-            bottomSheetBookOption.state != BottomSheetBehavior.STATE_EXPANDED -> {
-                bottomSheetBookOption.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-            else -> {
-                bottomSheetBookOption.state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-        }
+        showBottomSheetDialog()
     }
+
 
     override fun onTapCategory() {
         startActivity(BookCategoryActivity.newIntent(this@HomeActivity))

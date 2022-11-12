@@ -4,16 +4,11 @@
     style="?attr/bottomSheetStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#800E0E0E"
-    android:elevation="@dimen/margin_large"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="0dp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content"
         android:background="@color/white">
 
         <androidx.appcompat.widget.AppCompatImageView

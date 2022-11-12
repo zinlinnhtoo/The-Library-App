@@ -107,10 +107,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <include
-        android:id="@+id/bottomSheetBookOption"
-        layout="@layout/bottomsheet_book_option" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

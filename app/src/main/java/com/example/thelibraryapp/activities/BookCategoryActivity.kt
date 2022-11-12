@@ -11,6 +11,7 @@ import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.CategoryBookListAdapter
 import com.example.thelibraryapp.delegates.CategoryBookOptionDelegate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_book_category.*
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -46,14 +47,12 @@ class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate {
     }
 
     override fun onTapOptionFromCategory() {
-        val bottomSheetCategoryBookOption = BottomSheetBehavior.from(bottomSheetCategoryBookOption)
-        when {
-            bottomSheetCategoryBookOption.state != BottomSheetBehavior.STATE_EXPANDED -> {
-                bottomSheetCategoryBookOption.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-            else -> {
-                bottomSheetCategoryBookOption.state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-        }
+        showBottomSheetDialog()
+    }
+
+    private fun showBottomSheetDialog() {
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(R.layout.bottomsheet_book_option)
+        dialog.show()
     }
 }
