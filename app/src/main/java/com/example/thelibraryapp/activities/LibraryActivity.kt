@@ -5,7 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.adapters.LibraryViewPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.bottomNav
+import kotlinx.android.synthetic.main.activity_library.*
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -20,6 +24,24 @@ class LibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_library)
 
         setUpBottomNavBar()
+
+        setUpViewpagerAndTabLayout()
+    }
+
+    private fun setUpViewpagerAndTabLayout() {
+        val libraryViewPagerAdapter = LibraryViewPagerAdapter(this)
+        viewPagerLibrary.adapter = libraryViewPagerAdapter
+
+        TabLayoutMediator(tabLayoutLibrary, viewPagerLibrary) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Your books"
+                }
+                1 -> {
+                    tab.text = "Your shelves"
+                }
+            }
+        }.attach()
     }
 
     private fun setUpBottomNavBar() {

@@ -1,4 +1,21 @@
 package com.example.thelibraryapp.adapters
 
-class LibraryViewPagerAdapter {
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.thelibraryapp.fragments.BookFragment
+import com.example.thelibraryapp.fragments.ShelfFragment
+
+class LibraryViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+    override fun getItemCount(): Int {
+        return 2
+    }
+
+    override fun createFragment(position: Int): Fragment {
+        return when(position) {
+            0 -> BookFragment()
+            1 -> ShelfFragment()
+            else -> BookFragment()
+        }
+    }
 }
