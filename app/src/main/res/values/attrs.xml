@@ -6,4 +6,7 @@
         <attr name="strokeWidth" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="RoundedCornerImageView">
+        <attr name="cornerRadius" format="dimension"/>
+    </declare-styleable>
 </resources>

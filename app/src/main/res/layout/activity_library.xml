@@ -6,24 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".activities.LibraryActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Library Activity"/>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rlSearchBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_search_bar"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_marginBottom="@dimen/margin_medium_2"
+                android:background="@drawable/background_search_bar"
+                android:elevation="@dimen/margin_medium">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    app:srcCompat="@drawable/ic_baseline_search_24dp_black" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@id/icSearch"
+                    android:background="@null"
+                    android:hint="Search Play Books" />
+
+                <com.example.thelibraryapp.views.components.CircularProfileImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    app:srcCompat="@drawable/avatar"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutLibrary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            android:theme="@style/Theme.TheLibraryApp.BottomNavigationTheme"
-            app:menu="@menu/bottom_navigation_menu"/>
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerLibrary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tabLayoutLibrary"/>
 
     </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:theme="@style/Theme.TheLibraryApp.BottomNavigationTheme"
+        app:menu="@menu/bottom_navigation_menu"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

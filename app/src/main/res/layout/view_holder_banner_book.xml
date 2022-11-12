@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/width_banner_book"
     android:layout_height="@dimen/width_banner_book"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/green_book">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/option_white_24px"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/margin_medium"
-        android:elevation="4dp"/>
+        <com.example.thelibraryapp.views.components.RoundedCornerImageView
+            android:id="@+id/ivBook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:cornerRadius="10dp"
+            app:srcCompat="@drawable/green_book"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/option_white_24px"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_gravity="end"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivHeadphone"
@@ -22,7 +32,7 @@
         android:layout_marginBottom="@dimen/margin_medium"
         app:srcCompat="@drawable/ic_outline_headphones_24dp_white"
         android:background="@drawable/background_round_corner_black"
-        android:layout_alignParentBottom="true"/>
+        android:layout_gravity="bottom"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCheck"
@@ -32,7 +42,6 @@
         android:layout_marginBottom="@dimen/margin_medium"
         app:srcCompat="@drawable/ic_baseline_check_mark_24dp_white"
         android:background="@drawable/background_round_corner_black"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_gravity="bottom|end"/>
 
-</RelativeLayout>
+</FrameLayout>
