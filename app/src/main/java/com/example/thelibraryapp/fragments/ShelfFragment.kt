@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.activities.CreateShelfActivity
+import com.example.thelibraryapp.activities.ShelfDetailActivity
 import com.example.thelibraryapp.adapters.ShelfAdapter
+import com.example.thelibraryapp.delegates.ShelfViewHolderDelegate
 import kotlinx.android.synthetic.main.fragment_shelf.*
 
-class ShelfFragment : Fragment() {
+class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
 
     private lateinit var mShelfAdapter : ShelfAdapter
 
@@ -32,16 +34,19 @@ class ShelfFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        rvShelf.adapter = ShelfAdapter()
+        rvShelf.adapter = ShelfAdapter(this)
         rvShelf.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun setUpListener() {
         btnCreateShelf.setOnClickListener {
-            Toast.makeText(context, "Tap Create Shelf", Toast.LENGTH_SHORT).show()
             startActivity(context?.let { it1 -> CreateShelfActivity.newIntent(it1.applicationContext) })
             activity?.overridePendingTransition(0, 0)
         }
     }
 
+    override fun onTapShelf() {
+        startActivity(context?.let { it -> ShelfDetailActivity.newIntent(it.applicationContext) })
+        activity?.overridePendingTransition(0, 0)
+    }
 }

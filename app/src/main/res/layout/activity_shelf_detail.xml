@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ShelfDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:layout_marginBottom="@dimen/margin_medium_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBtnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                app:srcCompat="@drawable/ic_outline_arrow_back_ios_24dp_black"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBtnOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/option_black_24px"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvShelfName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 Interaction Design Books to Read"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_3x"
+            android:layout_below="@id/rlHeader"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_medium_2"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 books"
+            android:layout_below="@id/tvShelfName"
+            android:layout_alignStart="@id/tvShelfName"
+            android:layout_marginTop="@dimen/margin_medium"/>
+
+        <View
+            android:id="@+id/horizontalSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tvBookCount"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:background="@android:color/darker_gray"/>
+
+        <include
+            android:id="@+id/vpYourBooks"
+            layout="@layout/view_pod_your_books"
+            android:layout_below="@id/horizontalSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_medium_2"/>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
