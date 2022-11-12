@@ -4,14 +4,18 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.LibraryViewPagerAdapter
+import com.example.thelibraryapp.delegates.BookOptionDelegate
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.activity_library.*
+import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 
-class LibraryActivity : AppCompatActivity() {
+class LibraryActivity : AppCompatActivity(){
 
     companion object {
         fun newIntent(context: Context): Intent {

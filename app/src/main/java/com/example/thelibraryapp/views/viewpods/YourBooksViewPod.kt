@@ -16,25 +16,24 @@ import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.dummy.bookChip
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 import kotlinx.android.synthetic.main.bottomsheet_sort.*
 import kotlinx.android.synthetic.main.bottomsheet_view_as.*
 import kotlinx.android.synthetic.main.view_pod_your_books.view.*
 
 class YourBooksViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : RelativeLayout(context, attrs), BookOptionDelegate {
+) : RelativeLayout(context, attrs){
 
     lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
     lateinit var mLibraryLargeGridBookAdapter: LibraryLargeGridBookAdapter
     lateinit var mLibrarySmallGridBookAdapter: LibrarySmallGridBookAdapter
 
+    lateinit var mBookOptionDelegate: BookOptionDelegate
+
     override fun onFinishInflate() {
 
         setUpChip()
-
-        setUpListRecyclerView()
-        setUpLargeGridRecyclerView()
-        setUpSmallGridRecyclerView()
 
         ivSort.setOnClickListener {
             val dialog = BottomSheetDialog(context)
@@ -84,26 +83,35 @@ class YourBooksViewPod @JvmOverloads constructor(
             }
         }
 
-
-
         super.onFinishInflate()
 
     }
 
+    fun setUpYourBooksViewPod(delegate: BookOptionDelegate) {
+        setDelegate(delegate)
+        setUpListRecyclerView()
+        setUpLargeGridRecyclerView()
+        setUpSmallGridRecyclerView()
+    }
+
+    private fun setDelegate(delegate: BookOptionDelegate) {
+        this.mBookOptionDelegate = delegate
+    }
+
     private fun setUpListRecyclerView() {
-        mLibraryListBookAdapter = LibraryListBookAdapter(this)
+        mLibraryListBookAdapter = LibraryListBookAdapter(mBookOptionDelegate)
         rvListBook.adapter = mLibraryListBookAdapter
         rvListBook.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
     
     private fun setUpLargeGridRecyclerView() {
-        mLibraryLargeGridBookAdapter = LibraryLargeGridBookAdapter(this)
+        mLibraryLargeGridBookAdapter = LibraryLargeGridBookAdapter(mBookOptionDelegate)
         rvLargeGrid.adapter = mLibraryLargeGridBookAdapter
         rvLargeGrid.layoutManager = GridLayoutManager(context, 2)
     }
 
     private fun setUpSmallGridRecyclerView() {
-        mLibrarySmallGridBookAdapter = LibrarySmallGridBookAdapter(this)
+        mLibrarySmallGridBookAdapter = LibrarySmallGridBookAdapter(mBookOptionDelegate)
         rvSmallGrid.adapter = mLibrarySmallGridBookAdapter
         rvSmallGrid.layoutManager = GridLayoutManager(context, 3)
     }
@@ -122,11 +130,5 @@ class YourBooksViewPod @JvmOverloads constructor(
             Toast.makeText(context, label, Toast.LENGTH_SHORT).show()
         }
         return chip
-    }
-
-    override fun onTapBookOption() {
-        val dialog = BottomSheetDialog(context)
-        dialog.setContentView(R.layout.bottomsheet_book_option)
-        dialog.show()
     }
 }

@@ -6,6 +6,7 @@
     tools:context=".fragments.BookFragment">
 
     <include
+        android:id="@+id/vpYourBooks"
         layout="@layout/view_pod_your_books"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
