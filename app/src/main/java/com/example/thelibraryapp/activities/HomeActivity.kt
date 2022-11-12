@@ -16,6 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
+import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 
 class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate {
 
@@ -47,6 +48,11 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.bottomsheet_book_option)
         dialog.show()
+        dialog.llAddToShelves?.setOnClickListener {
+            dialog.dismiss()
+            startActivity(AddToShelvesActivity.newIntent(this))
+            overridePendingTransition(0, 0)
+        }
     }
 
     private fun setUpBookCategoryRecyclerView() {

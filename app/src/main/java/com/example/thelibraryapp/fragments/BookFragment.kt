@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.views.viewpods.YourBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,11 +18,6 @@ import kotlinx.android.synthetic.main.fragment_book.*
 class BookFragment : Fragment(), BookOptionDelegate {
 
     lateinit var mYourBooksViewPod: YourBooksViewPod
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +44,8 @@ class BookFragment : Fragment(), BookOptionDelegate {
         dialog?.llAddToShelves?.setOnClickListener {
             Toast.makeText(context, "Tap Add To Shelves", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
+            startActivity(context?.let { it1 -> AddToShelvesActivity.newIntent(it1.applicationContext) })
+            activity?.overridePendingTransition(0, 0)
         }
     }
 
