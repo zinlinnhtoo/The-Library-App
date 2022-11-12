@@ -52,7 +52,7 @@ class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate {
 
     private fun showBottomSheetDialog() {
         val dialog = BottomSheetDialog(this)
-        dialog.setContentView(R.layout.bottomsheet_book_option)
+        dialog.setContentView(R.layout.bottomsheet_category_book_option)
         dialog.show()
     }
 }

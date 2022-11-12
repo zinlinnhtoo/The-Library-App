@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.LibraryListBookAdapter
+import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.dummy.bookChip
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.view_pod_your_books.view.*
 
 class YourBooksViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : RelativeLayout(context, attrs) {
+) : RelativeLayout(context, attrs), BookOptionDelegate {
 
     lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
 
@@ -77,7 +78,7 @@ class YourBooksViewPod @JvmOverloads constructor(
     }
 
     private fun setUpListRecyclerView() {
-        mLibraryListBookAdapter = LibraryListBookAdapter()
+        mLibraryListBookAdapter = LibraryListBookAdapter(this)
         rvListBook.adapter = mLibraryListBookAdapter
         rvListBook.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
@@ -98,9 +99,9 @@ class YourBooksViewPod @JvmOverloads constructor(
         return chip
     }
 
-    private fun showBottomSheetDialog(bottomSheet: Int) {
+    override fun onTapBookOption() {
         val dialog = BottomSheetDialog(context)
-        dialog.setContentView(bottomSheet)
+        dialog.setContentView(R.layout.bottomsheet_book_option)
         dialog.show()
     }
 }
