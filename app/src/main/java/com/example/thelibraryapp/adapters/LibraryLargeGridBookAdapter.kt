@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.views.viewholders.LibraryLargeGridBookViewHolder
-import com.example.thelibraryapp.views.viewholders.LibraryListBookViewHolder
 
-class LibraryLargeGridAdapter(
+class LibraryLargeGridBookAdapter(
     private val mOptionDelegate: BookOptionDelegate
 ): Adapter<LibraryLargeGridBookViewHolder>() {
 

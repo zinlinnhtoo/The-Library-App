@@ -9,8 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
-import com.example.thelibraryapp.adapters.LibraryLargeGridAdapter
+import com.example.thelibraryapp.adapters.LibraryLargeGridBookAdapter
 import com.example.thelibraryapp.adapters.LibraryListBookAdapter
+import com.example.thelibraryapp.adapters.LibrarySmallGridBookAdapter
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.dummy.bookChip
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -24,7 +25,8 @@ class YourBooksViewPod @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs), BookOptionDelegate {
 
     lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
-    lateinit var mLibraryLargeGridAdapter: LibraryLargeGridAdapter
+    lateinit var mLibraryLargeGridBookAdapter: LibraryLargeGridBookAdapter
+    lateinit var mLibrarySmallGridBookAdapter: LibrarySmallGridBookAdapter
 
     override fun onFinishInflate() {
 
@@ -32,6 +34,7 @@ class YourBooksViewPod @JvmOverloads constructor(
 
         setUpListRecyclerView()
         setUpLargeGridRecyclerView()
+        setUpSmallGridRecyclerView()
 
         ivSort.setOnClickListener {
             val dialog = BottomSheetDialog(context)
@@ -63,16 +66,19 @@ class YourBooksViewPod @JvmOverloads constructor(
                 dialog.dismiss()
                 rvListBook.visibility = View.VISIBLE
                 rvLargeGrid.visibility = View.GONE
+                rvSmallGrid.visibility = View.GONE
             }
             dialog.rbLargeGrid.setOnClickListener {
                 Toast.makeText(context, "Large Grid", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
                 rvLargeGrid.visibility = View.VISIBLE
                 rvListBook.visibility = View.GONE
+                rvSmallGrid.visibility = View.GONE
             }
             dialog.rbSmallGrid.setOnClickListener {
                 Toast.makeText(context, "Small Grid", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
+                rvSmallGrid.visibility = View.VISIBLE
                 rvListBook.visibility = View.GONE
                 rvLargeGrid.visibility = View.GONE
             }
@@ -91,9 +97,15 @@ class YourBooksViewPod @JvmOverloads constructor(
     }
     
     private fun setUpLargeGridRecyclerView() {
-        mLibraryLargeGridAdapter = LibraryLargeGridAdapter(this)
-        rvLargeGrid.adapter = mLibraryLargeGridAdapter
+        mLibraryLargeGridBookAdapter = LibraryLargeGridBookAdapter(this)
+        rvLargeGrid.adapter = mLibraryLargeGridBookAdapter
         rvLargeGrid.layoutManager = GridLayoutManager(context, 2)
+    }
+
+    private fun setUpSmallGridRecyclerView() {
+        mLibrarySmallGridBookAdapter = LibrarySmallGridBookAdapter(this)
+        rvSmallGrid.adapter = mLibrarySmallGridBookAdapter
+        rvSmallGrid.layoutManager = GridLayoutManager(context, 3)
     }
 
     private fun setUpChip() {

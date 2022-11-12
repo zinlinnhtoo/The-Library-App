@@ -8,12 +8,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
-        android:id="@+id/flBookLargeGrid"
+        android:id="@+id/flBookSmallGrid"
         android:layout_width="wrap_content"
-        android:layout_height="250dp">
+        android:layout_height="150dp">
 
         <com.example.thelibraryapp.views.components.RoundedCornerImageView
-            android:id="@+id/ivBookLargeGrid"
+            android:id="@+id/ivBookSmallGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cornerRadius="20dp"
@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/book"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivOptionLargeGrid"
+            android:id="@+id/ivOptionSmallGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/option_white_24px"
@@ -32,12 +32,12 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/tvBookTitleLargeGrid"
+        android:id="@+id/tvBookTitleSmallGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/flBookLargeGrid"
-        android:layout_alignStart="@id/flBookLargeGrid"
-        android:layout_alignEnd="@id/flBookLargeGrid"
+        android:layout_below="@id/flBookSmallGrid"
+        android:layout_alignStart="@id/flBookSmallGrid"
+        android:layout_alignEnd="@id/flBookSmallGrid"
         android:layout_marginTop="@dimen/margin_medium"
         android:textSize="@dimen/text_regular_2x"
         android:textAllCaps="false"

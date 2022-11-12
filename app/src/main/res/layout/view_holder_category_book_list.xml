@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/book"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivOptionLargeGrid"
+            android:id="@+id/ivOptionInCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/option_white_24px"
