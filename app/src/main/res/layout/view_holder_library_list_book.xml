@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_medium_2"
+    android:layout_marginBottom="@dimen/margin_medium_2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.thelibraryapp.views.components.RoundedCornerImageView
+        android:id="@+id/ivBook"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        app:cornerRadius="10dp"
+        app:srcCompat="@drawable/book"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ivBook"
+        android:text="HOTD: Fire and Blood"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_regular_2x"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_alignStart="@id/tvTitle"
+        android:text="George R.R Martin"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBookType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAuthor"
+        android:layout_alignStart="@id/tvTitle"
+        android:text="Ebook. Sample"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/option_black_24px"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/margin_medium"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDownload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_outline_file_download_24dp_black"
+        android:layout_toLeftOf="@id/ivOption"
+        android:layout_alignTop="@id/ivOption"
+        android:layout_marginRight="@dimen/margin_large"/>
+
+</RelativeLayout>

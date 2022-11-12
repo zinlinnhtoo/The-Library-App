@@ -3,9 +3,12 @@ package com.example.thelibraryapp.views.viewpods
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.adapters.LibraryListBookAdapter
 import com.example.thelibraryapp.dummy.bookChip
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
@@ -17,9 +20,13 @@ class YourBooksViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : RelativeLayout(context, attrs) {
 
+    lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
+
     override fun onFinishInflate() {
 
         setUpChip()
+
+        setUpListRecyclerView()
 
         ivSort.setOnClickListener {
             val dialog = BottomSheetDialog(context)
@@ -49,19 +56,30 @@ class YourBooksViewPod @JvmOverloads constructor(
             dialog.rbList.setOnClickListener {
                 Toast.makeText(context, "List", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
+                rvListBook.visibility = View.VISIBLE
             }
             dialog.rbLargeGrid.setOnClickListener {
                 Toast.makeText(context, "Large Grid", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
+                rvListBook.visibility = View.GONE
             }
             dialog.rbSmallGrid.setOnClickListener {
                 Toast.makeText(context, "Small Grid", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
+                rvListBook.visibility = View.GONE
             }
         }
 
+
+
         super.onFinishInflate()
 
+    }
+
+    private fun setUpListRecyclerView() {
+        mLibraryListBookAdapter = LibraryListBookAdapter()
+        rvListBook.adapter = mLibraryListBookAdapter
+        rvListBook.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun setUpChip() {

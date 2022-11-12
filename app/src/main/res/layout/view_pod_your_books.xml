@@ -53,6 +53,15 @@
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_outline_view_list_24dp_black"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rvListBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivViewAs"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginBottom="@dimen/margin_xxlarge"/>
+
     </RelativeLayout>
 
 </com.example.thelibraryapp.views.viewpods.YourBooksViewPod>
