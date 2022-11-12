@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.adapters.LibraryLargeGridAdapter
 import com.example.thelibraryapp.adapters.LibraryListBookAdapter
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.dummy.bookChip
@@ -22,12 +24,14 @@ class YourBooksViewPod @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs), BookOptionDelegate {
 
     lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
+    lateinit var mLibraryLargeGridAdapter: LibraryLargeGridAdapter
 
     override fun onFinishInflate() {
 
         setUpChip()
 
         setUpListRecyclerView()
+        setUpLargeGridRecyclerView()
 
         ivSort.setOnClickListener {
             val dialog = BottomSheetDialog(context)
@@ -58,16 +62,19 @@ class YourBooksViewPod @JvmOverloads constructor(
                 Toast.makeText(context, "List", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
                 rvListBook.visibility = View.VISIBLE
+                rvLargeGrid.visibility = View.GONE
             }
             dialog.rbLargeGrid.setOnClickListener {
                 Toast.makeText(context, "Large Grid", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
+                rvLargeGrid.visibility = View.VISIBLE
                 rvListBook.visibility = View.GONE
             }
             dialog.rbSmallGrid.setOnClickListener {
                 Toast.makeText(context, "Small Grid", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
                 rvListBook.visibility = View.GONE
+                rvLargeGrid.visibility = View.GONE
             }
         }
 
@@ -81,6 +88,12 @@ class YourBooksViewPod @JvmOverloads constructor(
         mLibraryListBookAdapter = LibraryListBookAdapter(this)
         rvListBook.adapter = mLibraryListBookAdapter
         rvListBook.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    }
+    
+    private fun setUpLargeGridRecyclerView() {
+        mLibraryLargeGridAdapter = LibraryLargeGridAdapter(this)
+        rvLargeGrid.adapter = mLibraryLargeGridAdapter
+        rvLargeGrid.layoutManager = GridLayoutManager(context, 2)
     }
 
     private fun setUpChip() {

@@ -11,7 +11,7 @@ class CategoryBookListViewHolder(
     ) : ViewHolder(itemView) {
 
     init {
-        itemView.ivOptionInCategory.setOnClickListener {
+        itemView.ivOptionLargeGrid.setOnClickListener {
             mCategoryBookOptionDelegate.onTapOptionFromCategory()
         }
     }
