@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.thelibraryapp.R
-import com.example.thelibraryapp.data.vos.ListVO
+import com.example.thelibraryapp.data.vos.OverviewListVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.GoToCategoryDelegate
@@ -17,7 +17,7 @@ class BookCategoryAdapter(
     private val mBookViewHolderDelegate: BookViewHolderDelegate
 ): Adapter<BookCategoryViewHolder>() {
 
-    private var mCategoryList: List<ListVO> = listOf()
+    private var mOverviewList: List<OverviewListVO> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookCategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_book_category, parent, false)
@@ -25,21 +25,21 @@ class BookCategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: BookCategoryViewHolder, position: Int) {
-        if (mCategoryList.isNotEmpty()) {
-            holder.bindData(mCategoryList[position])
-            holder.setUpBookListRecyclerView(mCategoryList[position].books, mBookOptionDelegate, mBookViewHolderDelegate)
+        if (mOverviewList.isNotEmpty()) {
+            holder.bindData(mOverviewList[position])
+            mOverviewList[position].books?.let { holder.setUpBookListRecyclerView(it, mBookOptionDelegate, mBookViewHolderDelegate) }
         }
 
 
     }
 
     override fun getItemCount(): Int {
-        return mCategoryList.count()
+        return mOverviewList.count()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setNewData(listVO: List<ListVO>) {
-        mCategoryList = listVO
+    fun setNewData(overviewListVO: List<OverviewListVO>) {
+        mOverviewList = overviewListVO
         notifyDataSetChanged()
     }
 }

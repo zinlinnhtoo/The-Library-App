@@ -1,11 +1,10 @@
 package com.example.thelibraryapp.network.dataagents
 
-import com.example.thelibraryapp.data.vos.ListVO
-import com.example.thelibraryapp.network.responses.BookListResponse
+import com.example.thelibraryapp.data.vos.OverviewListVO
 
 interface BookDataAgent {
     fun getOverview(
-        onSuccess: (List<ListVO>) -> Unit,
+        onSuccess: (List<OverviewListVO>) -> Unit,
         onFailure:  (String) -> Unit
     )
 }

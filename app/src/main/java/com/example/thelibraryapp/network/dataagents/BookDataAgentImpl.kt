@@ -1,7 +1,6 @@
 package com.example.thelibraryapp.network.dataagents
 
-import android.util.Log
-import com.example.thelibraryapp.data.vos.ListVO
+import com.example.thelibraryapp.data.vos.OverviewListVO
 import com.example.thelibraryapp.network.NewYorkTimesApi
 import com.example.thelibraryapp.network.responses.BookListResponse
 import com.example.thelibraryapp.utils.BASE_URL
@@ -33,7 +32,7 @@ object BookDataAgentImpl: BookDataAgent {
         mNewYorkTimesApi = retrofit.create(NewYorkTimesApi::class.java)
     }
 
-    override fun getOverview(onSuccess: (List<ListVO>) -> Unit, onFailure: (String) -> Unit) {
+    override fun getOverview(onSuccess: (List<OverviewListVO>) -> Unit, onFailure: (String) -> Unit) {
         mNewYorkTimesApi?.getOverview()?.enqueue(
             object : Callback<BookListResponse> {
                 override fun onResponse(

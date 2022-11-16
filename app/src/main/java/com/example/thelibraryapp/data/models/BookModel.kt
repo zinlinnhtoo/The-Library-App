@@ -1,11 +1,10 @@
 package com.example.thelibraryapp.data.models
 
-import com.example.thelibraryapp.data.vos.BookVO
-import com.example.thelibraryapp.data.vos.ListVO
+import com.example.thelibraryapp.data.vos.OverviewListVO
 
 interface BookModel {
     fun getOverview(
-        onSuccess: (List<ListVO>) -> Unit,
+        onSuccess: (List<OverviewListVO>) -> Unit,
         onFailure: (String) -> Unit
     )
 }

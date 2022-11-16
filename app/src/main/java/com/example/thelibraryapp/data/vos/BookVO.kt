@@ -20,5 +20,10 @@ data class BookVO(
     val bookWidth: Int?,
 
     @SerializedName("book_image_height")
-    val bookHeight: Int?
+    val bookHeight: Int?,
+
+    @SerializedName("updated_date")
+    val updatedDate: String?,
+
+    var bookCategory: String?
 )
