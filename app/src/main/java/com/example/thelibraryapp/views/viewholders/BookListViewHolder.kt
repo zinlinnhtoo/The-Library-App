@@ -38,10 +38,10 @@ class BookListViewHolder(
             .load("${book.bookImage}")
             .into(itemView.ivBook)
 
-        val params: ViewGroup.LayoutParams = itemView.flBook.layoutParams
-        params.width = book.bookWidth!!
-        params.height = book.bookHeight!!
-
-        itemView.flBook.layoutParams = params
+//        val params: ViewGroup.LayoutParams = itemView.flBook.layoutParams
+//        params.width = book.bookWidth!!
+//        params.height = book.bookHeight!!
+//
+//        itemView.flBook.layoutParams = params
     }
 }
