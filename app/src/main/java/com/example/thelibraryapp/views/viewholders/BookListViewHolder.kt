@@ -21,7 +21,9 @@ class BookListViewHolder(
     init {
 
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook()
+            mBook?.let { book ->
+                mBookViewHolderDelegate.onTapBook(book.title.orEmpty())
+            }
         }
 
         itemView.ivOption.setOnClickListener {

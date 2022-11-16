@@ -30,7 +30,7 @@ data class OverviewListVO(
     val displayName: String?,
 
     @SerializedName("books")
-    @ColumnInfo(name = "books")
+    @ColumnInfo(name = "book")
     val books: List<BookVO>?
 
 )

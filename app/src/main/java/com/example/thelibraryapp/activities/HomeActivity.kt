@@ -30,6 +30,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
 
     private lateinit var mBookCategoryAdapter: BookCategoryAdapter
 
+
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, HomeActivity::class.java)
@@ -57,6 +58,26 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }?.observe(this) {
             mBookCategoryAdapter.setNewData(it)
+        }
+
+//        mBookModel.getBooks {
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//        }?.observe(this) {
+//            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+//        }
+//        val bookList = mBookModel.getBooks { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+//        var bookListString: String = ""
+//        Log.println(Log.INFO, "Book List Database", bookList.toString())
+//        bookList.forEach {
+//            bookListString += it.title
+//            Toast.makeText(this, bookListString, Toast.LENGTH_SHORT).show()
+//        }
+//        Toast.makeText(this, "$bookList", Toast.LENGTH_SHORT).show()
+
+        mBookModel.getBooks {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }?.observe(this) {
+            Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -119,7 +140,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
         startActivity(BookCategoryActivity.newIntent(this@HomeActivity))
     }
 
-    override fun onTapBook() {
-        startActivity(BookDetailActivity.newIntent(this))
+    override fun onTapBook(title: String) {
+        startActivity(BookDetailActivity.newIntent(this, title))
     }
 }

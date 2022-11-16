@@ -51,9 +51,9 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
         }
     }
 
-    override fun onTapBook() {
+    override fun onTapBook(title: String) {
         startActivity(context?.let {
-            BookDetailActivity.newIntent(it.applicationContext)
+            BookDetailActivity.newIntent(it.applicationContext, title)
         })
         activity?.overridePendingTransition(0, 0)
     }

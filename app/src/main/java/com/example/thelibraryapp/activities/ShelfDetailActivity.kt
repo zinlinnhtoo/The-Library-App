@@ -56,8 +56,8 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
         }
     }
 
-    override fun onTapBook() {
-        startActivity(BookDetailActivity.newIntent(this))
+    override fun onTapBook(title: String) {
+        startActivity(BookDetailActivity.newIntent(this, title))
         overridePendingTransition(0, 0)
     }
 }

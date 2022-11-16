@@ -15,7 +15,7 @@ class CategoryBookListViewHolder(
     init {
 
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook()
+            mBookViewHolderDelegate.onTapBook("Category Book")
         }
 
         itemView.ivOptionInCategory.setOnClickListener {

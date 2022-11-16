@@ -1,5 +1,7 @@
 package com.example.thelibraryapp.delegates
 
 interface BookViewHolderDelegate {
-    fun onTapBook()
+    fun onTapBook(
+        title: String
+    )
 }

@@ -57,7 +57,7 @@ class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate, Bo
         dialog.show()
     }
 
-    override fun onTapBook() {
-        startActivity(BookDetailActivity.newIntent(this))
+    override fun onTapBook(title: String) {
+        startActivity(BookDetailActivity.newIntent(this, title))
     }
 }

@@ -15,7 +15,7 @@ class LibrarySmallGridBookViewHolder(
     init {
 
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook()
+            mBookViewHolderDelegate.onTapBook("Library Small Grid")
         }
 
         itemView.ivOptionSmallGrid.setOnClickListener {

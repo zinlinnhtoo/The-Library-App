@@ -4,11 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.data.vos.OverviewListVO
+import com.example.thelibraryapp.persistance.daos.BookDao
 import com.example.thelibraryapp.persistance.daos.OverviewDao
 
-@Database(entities = [OverviewListVO::class], version = 1, exportSchema = false)
-abstract class TheLibraryDatabase: RoomDatabase() {
+@Database(
+    entities = [
+        OverviewListVO::class,
+        BookVO::class
+    ], version = 1, exportSchema = false
+)
+abstract class TheLibraryDatabase : RoomDatabase() {
 
     companion object {
         const val DB_NAME = "THE_LIBRARY_DB"
@@ -16,7 +23,7 @@ abstract class TheLibraryDatabase: RoomDatabase() {
         var dbInstance: TheLibraryDatabase? = null
 
         fun getDBInstance(context: Context): TheLibraryDatabase? {
-            when(dbInstance) {
+            when (dbInstance) {
                 null -> {
                     dbInstance = Room.databaseBuilder(
                         context,
@@ -33,4 +40,5 @@ abstract class TheLibraryDatabase: RoomDatabase() {
     }
 
     abstract fun overviewDao(): OverviewDao
+    abstract fun bookDao(): BookDao
 }

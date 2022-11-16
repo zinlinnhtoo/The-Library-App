@@ -11,7 +11,7 @@ class BannerBookViewHolder(
 
     init {
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook()
+            mBookViewHolderDelegate.onTapBook("Banner Book")
         }
     }
 }

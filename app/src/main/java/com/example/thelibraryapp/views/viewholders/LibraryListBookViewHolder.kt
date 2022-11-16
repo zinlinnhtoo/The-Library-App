@@ -15,7 +15,7 @@ class LibraryListBookViewHolder(
     init {
 
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook()
+            mBookViewHolderDelegate.onTapBook("Library List")
         }
 
         itemView.ivOption.setOnClickListener {

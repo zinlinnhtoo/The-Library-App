@@ -16,7 +16,7 @@ class LibraryLargeGridBookViewHolder(
     init {
 
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook()
+            mBookViewHolderDelegate.onTapBook("Library Large Grid")
         }
 
         itemView.ivOptionLargeGrid.setOnClickListener {

@@ -4,23 +4,35 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.thelibraryapp.R
-import com.example.thelibraryapp.data.models.BookModel
-import com.example.thelibraryapp.data.models.BookModelImpl
 import kotlinx.android.synthetic.main.activity_book_detail.*
 
 class BookDetailActivity : AppCompatActivity() {
 
+    //intent extra from HomeActivity
+    private var mBookTitle: String? = null
+
+
     companion object {
-        fun newIntent(context: Context): Intent {
+
+        private const val EXTRA_BOOK_TITLE = "EXTRA_BOOK_TITLE"
+
+        fun newIntent(context: Context, bookTitle: String): Intent {
             return Intent(context, BookDetailActivity::class.java)
+                .putExtra(EXTRA_BOOK_TITLE, bookTitle)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_detail)
+
+        getExtraFromHomeActivity()
+
+        tvBookTitleDetail.text = mBookTitle
+    }
+
+    private fun getExtraFromHomeActivity() {
+        mBookTitle = intent?.getStringExtra(EXTRA_BOOK_TITLE)
     }
 }
