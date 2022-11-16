@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.BannerBookAdapter
 import com.example.thelibraryapp.adapters.BookCategoryAdapter
+import com.example.thelibraryapp.data.models.BookModel
+import com.example.thelibraryapp.data.models.BookModelImpl
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.GoToCategoryDelegate
@@ -20,6 +23,8 @@ import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 
 class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate, BookViewHolderDelegate {
+
+    private val mBookModel: BookModel = BookModelImpl
 
     private lateinit var mBannerBookAdapter: BannerBookAdapter
 
@@ -43,6 +48,20 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
 
         setUpBookCategoryRecyclerView()
 
+        requestData()
+
+    }
+
+    private fun requestData() {
+        mBookModel.getOverview(
+            onSuccess = {
+//                Log.println(Log.INFO, "ListVO", it.toString())
+                mBookCategoryAdapter.setNewData(it)
+            },
+            onFailure = {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     private fun showBottomSheetDialog() {

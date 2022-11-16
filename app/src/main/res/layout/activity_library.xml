@@ -74,6 +74,7 @@
             android:layout_marginTop="@dimen/margin_medium_2"
             app:tabTextAppearance="@style/TabTextAppearance"
             app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/colorAccent"
             app:tabTextColor="@color/black"
             app:tabGravity="fill"
