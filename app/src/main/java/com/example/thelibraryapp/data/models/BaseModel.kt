@@ -30,4 +30,8 @@ abstract class BaseModel {
 
         mNewYorkTimesApi = retrofit.create(NewYorkTimesApi::class.java)
     }
+
+    fun initDatabase(context: Context) {
+        BookModelImpl.mTheLibraryDatabase = TheLibraryDatabase.getDBInstance(context)
+    }
 }

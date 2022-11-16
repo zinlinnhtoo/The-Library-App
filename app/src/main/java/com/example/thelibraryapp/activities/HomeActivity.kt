@@ -53,15 +53,11 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     }
 
     private fun requestData() {
-        mBookModel.getOverview(
-            onSuccess = {
-//                Log.println(Log.INFO, "ListVO", it.toString())
-                mBookCategoryAdapter.setNewData(it)
-            },
-            onFailure = {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            }
-        )
+        mBookModel.getOverview {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }?.observe(this) {
+            mBookCategoryAdapter.setNewData(it)
+        }
     }
 
     private fun showBottomSheetDialog() {
