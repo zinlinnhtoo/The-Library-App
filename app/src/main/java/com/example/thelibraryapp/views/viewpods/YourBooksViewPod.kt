@@ -12,6 +12,7 @@ import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.LibraryLargeGridBookAdapter
 import com.example.thelibraryapp.adapters.LibraryListBookAdapter
 import com.example.thelibraryapp.adapters.LibrarySmallGridBookAdapter
+import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.dummy.bookChip
@@ -33,59 +34,68 @@ class YourBooksViewPod @JvmOverloads constructor(
     lateinit var mBookViewHolderDelegate: BookViewHolderDelegate
 
     override fun onFinishInflate() {
-
         setUpChip()
-
         ivSort.setOnClickListener {
-            val dialog = BottomSheetDialog(context)
-            dialog.setContentView(R.layout.bottomsheet_sort)
-            dialog.show()
-            dialog.rbRecent.setOnClickListener {
-                Toast.makeText(context, "Recent", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-            }
-            dialog.rbTitle.setOnClickListener {
-                Toast.makeText(context, "Title", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-            }
-            dialog.rbAuthor.setOnClickListener {
-                Toast.makeText(context, "Author", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-            }
+            setUpBottomsheetForSort()
 
         }
-
-
-
         ivViewAs.setOnClickListener {
-            val dialog = BottomSheetDialog(context)
-            dialog.setContentView(R.layout.bottomsheet_view_as)
-            dialog.show()
-            dialog.rbList.setOnClickListener {
-                Toast.makeText(context, "List", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-                rvListBook.visibility = View.VISIBLE
-                rvLargeGrid.visibility = View.GONE
-                rvSmallGrid.visibility = View.GONE
-            }
-            dialog.rbLargeGrid.setOnClickListener {
-                Toast.makeText(context, "Large Grid", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-                rvLargeGrid.visibility = View.VISIBLE
-                rvListBook.visibility = View.GONE
-                rvSmallGrid.visibility = View.GONE
-            }
-            dialog.rbSmallGrid.setOnClickListener {
-                Toast.makeText(context, "Small Grid", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-                rvSmallGrid.visibility = View.VISIBLE
-                rvListBook.visibility = View.GONE
-                rvLargeGrid.visibility = View.GONE
-            }
+            setUpBottomsheetForList()
         }
 
         super.onFinishInflate()
 
+    }
+
+    fun setData(bookList: List<BookVO>) {
+        mLibraryListBookAdapter.setNewData(bookList)
+        mLibraryLargeGridBookAdapter.setNewData(bookList)
+        mLibrarySmallGridBookAdapter.setNewData(bookList)
+    }
+
+    private fun setUpBottomsheetForList() {
+        val dialog = BottomSheetDialog(context)
+        dialog.setContentView(R.layout.bottomsheet_view_as)
+        dialog.show()
+        dialog.rbList.setOnClickListener {
+            Toast.makeText(context, "List", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+            rvListBook.visibility = VISIBLE
+            rvLargeGrid.visibility = GONE
+            rvSmallGrid.visibility = GONE
+        }
+        dialog.rbLargeGrid.setOnClickListener {
+            Toast.makeText(context, "Large Grid", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+            rvLargeGrid.visibility = VISIBLE
+            rvListBook.visibility = GONE
+            rvSmallGrid.visibility = GONE
+        }
+        dialog.rbSmallGrid.setOnClickListener {
+            Toast.makeText(context, "Small Grid", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+            rvSmallGrid.visibility = VISIBLE
+            rvListBook.visibility = GONE
+            rvLargeGrid.visibility = GONE
+        }
+    }
+
+    private fun setUpBottomsheetForSort() {
+        val dialog = BottomSheetDialog(context)
+        dialog.setContentView(R.layout.bottomsheet_sort)
+        dialog.show()
+        dialog.rbRecent.setOnClickListener {
+            Toast.makeText(context, "Recent", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        dialog.rbTitle.setOnClickListener {
+            Toast.makeText(context, "Title", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        dialog.rbAuthor.setOnClickListener {
+            Toast.makeText(context, "Author", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
     }
 
     fun setUpYourBooksViewPod(

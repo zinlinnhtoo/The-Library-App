@@ -22,6 +22,7 @@
         android:text="HOTD: Fire and Blood"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
+        android:maxLines="1"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/text_regular_2x"/>
@@ -58,6 +59,8 @@
         android:id="@+id/ivDownload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2"
         app:srcCompat="@drawable/ic_outline_file_download_24dp_black"
         android:layout_toLeftOf="@id/ivOption"
         android:layout_alignTop="@id/ivOption"

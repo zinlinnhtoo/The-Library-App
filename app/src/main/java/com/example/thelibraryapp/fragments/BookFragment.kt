@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.activities.BookDetailActivity
+import com.example.thelibraryapp.data.models.BookModel
+import com.example.thelibraryapp.data.models.BookModelImpl
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
@@ -20,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_book.*
 
 
 class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
+
+    private val mBookModel: BookModel = BookModelImpl
 
     lateinit var mYourBooksViewPod: YourBooksViewPod
 
@@ -34,6 +38,15 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViewPods()
+        requestData()
+    }
+
+    private fun requestData() {
+        mBookModel.getReadBook {
+            Toast.makeText(context, "get read book error", Toast.LENGTH_SHORT).show()
+        }?.observe(viewLifecycleOwner) {
+            mYourBooksViewPod.setData(it)
+        }
     }
 
     private fun setUpViewPods() {
