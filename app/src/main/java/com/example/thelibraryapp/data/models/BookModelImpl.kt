@@ -27,23 +27,11 @@ object BookModelImpl : BaseModel(), BookModel {
         return mTheLibraryDatabase?.overviewDao()?.getAllOverviewList()
     }
 
-    override fun getBooks(onFailure: (String) -> Unit): LiveData<List<BookVO>>? {
-//        val overViewList = mTheLibraryDatabase?.overviewDao()?.getAllOverviewList()
-//        val bookList = mTheLibraryDatabase?.overviewDao()?.getAllBooks()
-//        mTheLibraryDatabase?.bookDao()?.insertBook(bookList ?: listOf())
-//
-//        return mTheLibraryDatabase?.bookDao()?.getAllBooks()
+    override fun insertBook(book: BookVO, onFailure: (String) -> Unit) {
+        mTheLibraryDatabase?.bookDao()?.insertSingleBook(book)
+    }
 
-        val overViewList = mTheLibraryDatabase?.overviewDao()?.getAllOverviewListOneTime()
-        val bookList = mutableListOf<BookVO>()
-        overViewList?.forEach { overviewListVO ->
-            overviewListVO.books?.forEach { bookVO ->
-                bookList.add(bookVO)
-            }
-        }
-        Log.println(Log.INFO, "bookList", "$bookList")
-        mTheLibraryDatabase?.bookDao()?.insertBook(bookList)
-
+    override fun getReadBook(onFailure: (String) -> Unit): LiveData<List<BookVO>>? {
         return mTheLibraryDatabase?.bookDao()?.getAllBooks()
     }
 

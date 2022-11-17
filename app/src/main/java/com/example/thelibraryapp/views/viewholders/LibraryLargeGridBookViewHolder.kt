@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import kotlinx.android.synthetic.main.view_holder_library_large_grid_book.view.*
-import kotlinx.android.synthetic.main.view_holder_library_list_book.view.*
 
 class LibraryLargeGridBookViewHolder(
     itemView: View,
@@ -16,7 +15,7 @@ class LibraryLargeGridBookViewHolder(
     init {
 
         itemView.setOnClickListener {
-            mBookViewHolderDelegate.onTapBook("Library Large Grid")
+//            mBookViewHolderDelegate.onTapBook()
         }
 
         itemView.ivOptionLargeGrid.setOnClickListener {

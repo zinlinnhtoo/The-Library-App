@@ -4,17 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.GridLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.CategoryBookListAdapter
+import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.CategoryBookOptionDelegate
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_book_category.*
-import kotlinx.android.synthetic.main.activity_home.*
 
 class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate, BookViewHolderDelegate {
 
@@ -57,7 +55,8 @@ class BookCategoryActivity : AppCompatActivity(), CategoryBookOptionDelegate, Bo
         dialog.show()
     }
 
-    override fun onTapBook(title: String) {
-        startActivity(BookDetailActivity.newIntent(this, title))
+    override fun onTapBook(book: BookVO) {
+        val bookJson = Gson().toJson(book)
+        startActivity(BookDetailActivity.newIntent(this, bookJson))
     }
 }

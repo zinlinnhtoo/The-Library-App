@@ -9,10 +9,12 @@ import android.widget.Toast
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.activities.BookDetailActivity
+import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.views.viewpods.YourBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 import kotlinx.android.synthetic.main.fragment_book.*
 
@@ -51,9 +53,10 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
         }
     }
 
-    override fun onTapBook(title: String) {
+    override fun onTapBook(book: BookVO) {
+        val bookJson = Gson().toJson(book)
         startActivity(context?.let {
-            BookDetailActivity.newIntent(it.applicationContext, title)
+            BookDetailActivity.newIntent(it.applicationContext, bookJson)
         })
         activity?.overridePendingTransition(0, 0)
     }

@@ -5,21 +5,26 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.data.vos.BookVO
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_book_detail.*
 
 class BookDetailActivity : AppCompatActivity() {
 
+    private var mBook: BookVO? = null
+
     //intent extra from HomeActivity
-    private var mBookTitle: String? = null
+    private var mBookJson: String? = null
+
 
 
     companion object {
 
         private const val EXTRA_BOOK_TITLE = "EXTRA_BOOK_TITLE"
 
-        fun newIntent(context: Context, bookTitle: String): Intent {
+        fun newIntent(context: Context, bookJson: String): Intent {
             return Intent(context, BookDetailActivity::class.java)
-                .putExtra(EXTRA_BOOK_TITLE, bookTitle)
+                .putExtra(EXTRA_BOOK_TITLE, bookJson)
         }
     }
 
@@ -29,10 +34,15 @@ class BookDetailActivity : AppCompatActivity() {
 
         getExtraFromHomeActivity()
 
-        tvBookTitleDetail.text = mBookTitle
+        mBookJson?.let {
+            val book = Gson().fromJson(it, BookVO::class.java)
+
+            tvBookTitleDetail.text = book.title
+        }
+
     }
 
     private fun getExtraFromHomeActivity() {
-        mBookTitle = intent?.getStringExtra(EXTRA_BOOK_TITLE)
+        mBookJson = intent?.getStringExtra(EXTRA_BOOK_TITLE)
     }
 }

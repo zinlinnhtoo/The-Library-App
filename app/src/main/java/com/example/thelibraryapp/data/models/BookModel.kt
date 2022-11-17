@@ -9,7 +9,12 @@ interface BookModel {
         onFailure: (String) -> Unit
     ): LiveData<List<OverviewListVO>>?
 
-    fun getBooks(
+    fun insertBook(
+        book: BookVO,
+        onFailure: (String) -> Unit
+    )
+
+    fun getReadBook(
         onFailure: (String) -> Unit
     ): LiveData<List<BookVO>>?
 }

@@ -1,8 +1,6 @@
 package com.example.thelibraryapp.views.viewholders
 
-import android.annotation.SuppressLint
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.thelibraryapp.data.vos.BookVO
@@ -22,7 +20,7 @@ class BookListViewHolder(
 
         itemView.setOnClickListener {
             mBook?.let { book ->
-                mBookViewHolderDelegate.onTapBook(book.title.orEmpty())
+                mBookViewHolderDelegate.onTapBook(book)
             }
         }
 

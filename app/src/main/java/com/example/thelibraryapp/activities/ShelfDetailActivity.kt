@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.views.viewpods.YourBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_shelf_detail.*
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 
@@ -56,8 +57,9 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
         }
     }
 
-    override fun onTapBook(title: String) {
-        startActivity(BookDetailActivity.newIntent(this, title))
+    override fun onTapBook(book: BookVO) {
+        val bookJson = Gson().toJson(book)
+        startActivity(BookDetailActivity.newIntent(this, bookJson))
         overridePendingTransition(0, 0)
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
@@ -12,12 +11,14 @@ import com.example.thelibraryapp.adapters.BannerBookAdapter
 import com.example.thelibraryapp.adapters.BookCategoryAdapter
 import com.example.thelibraryapp.data.models.BookModel
 import com.example.thelibraryapp.data.models.BookModelImpl
+import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.GoToCategoryDelegate
 import com.example.thelibraryapp.dummy.tabList
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
+import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
@@ -27,6 +28,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     private val mBookModel: BookModel = BookModelImpl
 
     private lateinit var mBannerBookAdapter: BannerBookAdapter
+    private lateinit var mBannerCarouselLayoutManager: CarouselLayoutManager
 
     private lateinit var mBookCategoryAdapter: BookCategoryAdapter
 
@@ -60,24 +62,11 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
             mBookCategoryAdapter.setNewData(it)
         }
 
-//        mBookModel.getBooks {
-//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-//        }?.observe(this) {
-//            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-//        }
-//        val bookList = mBookModel.getBooks { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
-//        var bookListString: String = ""
-//        Log.println(Log.INFO, "Book List Database", bookList.toString())
-//        bookList.forEach {
-//            bookListString += it.title
-//            Toast.makeText(this, bookListString, Toast.LENGTH_SHORT).show()
-//        }
-//        Toast.makeText(this, "$bookList", Toast.LENGTH_SHORT).show()
-
-        mBookModel.getBooks {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        mBookModel.getReadBook {
+            Toast.makeText(this, "get read book error", Toast.LENGTH_SHORT).show()
         }?.observe(this) {
-            Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
+            mBannerBookAdapter.setNewData(it)
+            mBannerCarouselLayoutManager.scrollToPosition(it.lastIndex)
         }
     }
 
@@ -112,6 +101,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
         mBannerBookAdapter = BannerBookAdapter(this)
         rvBannerBook.adapter = mBannerBookAdapter
         rvBannerBook.setIntervalRatio(0.8f)
+        mBannerCarouselLayoutManager = rvBannerBook.getCarouselLayoutManager()
     }
 
     private fun setUpBottomNavBar() {
@@ -140,7 +130,11 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
         startActivity(BookCategoryActivity.newIntent(this@HomeActivity))
     }
 
-    override fun onTapBook(title: String) {
-        startActivity(BookDetailActivity.newIntent(this, title))
+    override fun onTapBook(book: BookVO) {
+        mBookModel.insertBook(book, onFailure = {
+            Toast.makeText(this, "insert book error", Toast.LENGTH_SHORT).show()
+        })
+        val bookJson = Gson().toJson(book)
+        startActivity(BookDetailActivity.newIntent(this, bookJson))
     }
 }

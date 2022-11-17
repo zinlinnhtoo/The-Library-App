@@ -1,7 +1,9 @@
 package com.example.thelibraryapp.delegates
 
+import com.example.thelibraryapp.data.vos.BookVO
+
 interface BookViewHolderDelegate {
     fun onTapBook(
-        title: String
+        book: BookVO
     )
 }
