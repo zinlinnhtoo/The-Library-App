@@ -32,6 +32,6 @@ abstract class BaseModel {
     }
 
     fun initDatabase(context: Context) {
-        BookModelImpl.mTheLibraryDatabase = TheLibraryDatabase.getDBInstance(context)
+        mTheLibraryDatabase = TheLibraryDatabase.getDBInstance(context)
     }
 }

@@ -6,13 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.data.vos.OverviewListVO
+import com.example.thelibraryapp.data.vos.ShelfVO
 import com.example.thelibraryapp.persistance.daos.BookDao
 import com.example.thelibraryapp.persistance.daos.OverviewDao
+import com.example.thelibraryapp.persistance.daos.ShelfDao
 
 @Database(
     entities = [
         OverviewListVO::class,
-        BookVO::class
+        BookVO::class,
+        ShelfVO::class
     ], version = 1, exportSchema = false
 )
 abstract class TheLibraryDatabase : RoomDatabase() {
@@ -41,4 +44,5 @@ abstract class TheLibraryDatabase : RoomDatabase() {
 
     abstract fun overviewDao(): OverviewDao
     abstract fun bookDao(): BookDao
+    abstract fun shelfDao(): ShelfDao
 }

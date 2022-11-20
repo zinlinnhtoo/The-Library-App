@@ -23,7 +23,6 @@ class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shelf, container, false)
     }
 
@@ -34,7 +33,8 @@ class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
     }
 
     private fun setUpRecyclerView() {
-        rvShelf.adapter = ShelfAdapter(this)
+        mShelfAdapter = ShelfAdapter(this)
+        rvShelf.adapter = mShelfAdapter
         rvShelf.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 

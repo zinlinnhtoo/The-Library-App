@@ -23,6 +23,7 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:maxLines="1"
+        android:maxWidth="300dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/text_regular_2x"/>

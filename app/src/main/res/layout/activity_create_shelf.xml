@@ -51,7 +51,9 @@
             android:maxLength="50"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/text_regular_3x"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:imeOptions="actionDone"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTextCountMax"

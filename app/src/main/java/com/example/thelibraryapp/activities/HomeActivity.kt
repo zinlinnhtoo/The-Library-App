@@ -66,7 +66,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
             Toast.makeText(this, "get read book error", Toast.LENGTH_SHORT).show()
         }?.observe(this) {
             mBannerBookAdapter.setNewData(it)
-            mBannerCarouselLayoutManager.scrollToPosition(it.lastIndex)
+//            mBannerCarouselLayoutManager.scrollToPosition(it.lastIndex)
         }
     }
 
