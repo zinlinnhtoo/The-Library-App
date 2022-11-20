@@ -1,5 +1,6 @@
 package com.example.thelibraryapp.data.vos
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,13 +9,10 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "books")
 data class BookVO(
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id: Int = 0,
-
     @SerializedName("title")
+    @PrimaryKey
     @ColumnInfo(name = "title")
-    val title: String?,
+    val title: String,
 
     @SerializedName("author")
     @ColumnInfo(name = "author")

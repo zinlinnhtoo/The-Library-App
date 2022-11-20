@@ -62,9 +62,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
             mBookCategoryAdapter.setNewData(it)
         }
 
-        mBookModel.getReadBook {
-            Toast.makeText(this, "get read book error", Toast.LENGTH_SHORT).show()
-        }?.observe(this) {
+        mBookModel.getReadBook()?.observe(this) {
             mBannerBookAdapter.setNewData(it)
 //            mBannerCarouselLayoutManager.scrollToPosition(it.lastIndex)
         }
@@ -132,7 +130,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
 
     override fun onTapBook(book: BookVO) {
         mBookModel.insertBook(book, onFailure = {
-            Toast.makeText(this, "insert book error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         val bookJson = Gson().toJson(book)
         startActivity(BookDetailActivity.newIntent(this, bookJson))

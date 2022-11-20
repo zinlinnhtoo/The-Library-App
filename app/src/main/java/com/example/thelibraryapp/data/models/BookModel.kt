@@ -14,7 +14,5 @@ interface BookModel {
         onFailure: (String) -> Unit
     )
 
-    fun getReadBook(
-        onFailure: (String) -> Unit
-    ): LiveData<List<BookVO>>?
+    fun getReadBook(): LiveData<List<BookVO>>?
 }

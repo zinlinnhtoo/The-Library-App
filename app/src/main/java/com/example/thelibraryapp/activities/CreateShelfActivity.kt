@@ -31,18 +31,6 @@ class CreateShelfActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_shelf)
 
         setUpListener()
-        val book = BookVO(
-            id = 2,
-            title = null,
-            author = null,
-            bookImage = null,
-            description = null,
-            bookCategory = null,
-            bookHeight = null,
-            bookWidth = null,
-            updatedDate = null
-        )
-        bookList = listOf<BookVO>(book)
 
     }
 
@@ -53,13 +41,12 @@ class CreateShelfActivity : AppCompatActivity() {
 
         etShelfName.setOnEditorActionListener { _, i, _ ->
             if(i == EditorInfo.IME_ACTION_DONE) {
-//                Toast.makeText(this, etShelfName.text.toString(), Toast.LENGTH_SHORT).show()
                 mShelfTitle = etShelfName.text.toString()
-                Log.println(Log.INFO, "Shelf", mShelfTitle)
                 mShelfModel.insertShelf(ShelfVO(mShelfTitle, listOf()),
                     onFailure = {
                         Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
                     })
+                finish()
                 return@setOnEditorActionListener true
             }
             false

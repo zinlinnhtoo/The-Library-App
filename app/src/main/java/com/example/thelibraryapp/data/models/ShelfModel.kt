@@ -10,7 +10,5 @@ interface ShelfModel {
         onFailure: (String) -> Unit
     )
 
-    fun getAllShelves(
-        onFailure: (String) -> Unit
-    ): LiveData<List<ShelfVO>>?
+    fun getAllShelves(): LiveData<List<ShelfVO>>?
 }

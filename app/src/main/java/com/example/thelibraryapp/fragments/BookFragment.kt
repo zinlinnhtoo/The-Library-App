@@ -42,9 +42,7 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
     }
 
     private fun requestData() {
-        mBookModel.getReadBook {
-            Toast.makeText(context, "get read book error", Toast.LENGTH_SHORT).show()
-        }?.observe(viewLifecycleOwner) {
+        mBookModel.getReadBook()?.observe(viewLifecycleOwner) {
             mYourBooksViewPod.setData(it)
         }
     }

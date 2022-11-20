@@ -19,12 +19,6 @@ interface BookDao {
     @Query("SELECT * FROM books")
     fun getAllBooks(): LiveData<List<BookVO>>
 
-    @Query("SELECT * FROM books WHERE id = :bookId")
-    fun getBookByIdOneTime(bookId: Int): BookVO?
-
-    @Query("SELECT * FROM books WHERE id = :bookId")
-    fun getBookById(bookId: Int): LiveData<BookVO>
-
     @Query("DELETE FROM books")
     fun deleteAllBooks()
 }

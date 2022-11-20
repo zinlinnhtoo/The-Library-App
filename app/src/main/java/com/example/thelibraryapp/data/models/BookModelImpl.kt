@@ -28,10 +28,14 @@ object BookModelImpl : BaseModel(), BookModel {
     }
 
     override fun insertBook(book: BookVO, onFailure: (String) -> Unit) {
-        mTheLibraryDatabase?.bookDao()?.insertSingleBook(book)
+        try {
+            mTheLibraryDatabase?.bookDao()?.insertSingleBook(book)
+        } catch (e: Exception) {
+            onFailure(e.toString())
+        }
     }
 
-    override fun getReadBook(onFailure: (String) -> Unit): LiveData<List<BookVO>>? {
+    override fun getReadBook(): LiveData<List<BookVO>>? {
         return mTheLibraryDatabase?.bookDao()?.getAllBooks()
     }
 

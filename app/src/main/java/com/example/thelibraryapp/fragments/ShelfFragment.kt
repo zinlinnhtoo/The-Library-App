@@ -12,10 +12,14 @@ import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.activities.CreateShelfActivity
 import com.example.thelibraryapp.activities.ShelfDetailActivity
 import com.example.thelibraryapp.adapters.ShelfAdapter
+import com.example.thelibraryapp.data.models.ShelfModel
+import com.example.thelibraryapp.data.models.ShelfModelImpl
 import com.example.thelibraryapp.delegates.ShelfViewHolderDelegate
 import kotlinx.android.synthetic.main.fragment_shelf.*
 
 class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
+
+    private val mShelfModel: ShelfModel = ShelfModelImpl
 
     private lateinit var mShelfAdapter : ShelfAdapter
 
@@ -30,6 +34,13 @@ class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         setUpListener()
+        requestData()
+    }
+
+    private fun requestData() {
+        mShelfModel.getAllShelves()?.observe(viewLifecycleOwner) {
+            mShelfAdapter.setNewData(it)
+        }
     }
 
     private fun setUpRecyclerView() {
