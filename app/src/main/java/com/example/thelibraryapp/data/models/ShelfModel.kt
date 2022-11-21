@@ -6,9 +6,10 @@ import com.example.thelibraryapp.data.vos.ShelfVO
 interface ShelfModel {
 
     fun insertShelf(
-        shelf: ShelfVO,
-        onFailure: (String) -> Unit
+        shelf: ShelfVO
     )
 
     fun getAllShelves(): LiveData<List<ShelfVO>>?
+
+    fun deleteShelf(shelf: ShelfVO)
 }

@@ -77,7 +77,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Download"
-                    android:textStyle="bold"
                     android:textSize="@dimen/text_regular_3x"
                     android:textColor="@color/black"/>
 
@@ -105,7 +104,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Delete from your library"
-                    android:textStyle="bold"
                     android:textSize="@dimen/text_regular_3x"
                     android:textColor="@color/black"/>
 
@@ -133,7 +131,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Add to shelves..."
-                    android:textStyle="bold"
                     android:textSize="@dimen/text_regular_3x"
                     android:textColor="@color/black"/>
 
@@ -161,7 +158,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Mark as read"
-                    android:textStyle="bold"
                     android:textSize="@dimen/text_regular_3x"
                     android:textColor="@color/black"/>
 

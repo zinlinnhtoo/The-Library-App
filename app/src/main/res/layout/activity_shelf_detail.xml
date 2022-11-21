@@ -36,26 +36,45 @@
 
         </RelativeLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvShelfName"
+        <FrameLayout
+            android:id="@+id/flShelfName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10 Interaction Design Books to Read"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_regular_3x"
             android:layout_below="@id/rlHeader"
             android:layout_marginStart="@dimen/margin_medium_2"
             android:layout_marginTop="@dimen/margin_medium_2"
-            android:layout_marginEnd="@dimen/margin_medium_2"/>
+            android:layout_marginEnd="@dimen/margin_medium_2">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvShelfName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 Interaction Design Books to Read"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_regular_3x" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etShelfName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 Interaction Design Books to Read"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_regular_3x"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:visibility="gone"/>
+
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvBookCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3 books"
-            android:layout_below="@id/tvShelfName"
-            android:layout_alignStart="@id/tvShelfName"
+            android:layout_below="@id/flShelfName"
+            android:layout_alignStart="@id/flShelfName"
             android:layout_marginTop="@dimen/margin_medium"/>
 
         <View

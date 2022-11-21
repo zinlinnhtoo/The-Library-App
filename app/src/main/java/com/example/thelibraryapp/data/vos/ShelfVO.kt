@@ -17,7 +17,7 @@ data class ShelfVO(
 
 //    @ColumnInfo(name = "title")
     @PrimaryKey
-    val title: String,
+    var title: String,
 
     @ColumnInfo(name = "books")
     val books: List<BookVO>?
