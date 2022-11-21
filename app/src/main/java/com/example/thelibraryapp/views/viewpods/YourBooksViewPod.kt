@@ -3,18 +3,19 @@ package com.example.thelibraryapp.views.viewpods
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.adapters.FilterChipAdapter
 import com.example.thelibraryapp.adapters.LibraryLargeGridBookAdapter
 import com.example.thelibraryapp.adapters.LibraryListBookAdapter
 import com.example.thelibraryapp.adapters.LibrarySmallGridBookAdapter
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
+import com.example.thelibraryapp.delegates.FilterChipDelegate
 import com.example.thelibraryapp.dummy.bookChip
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
@@ -26,21 +27,22 @@ class YourBooksViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : RelativeLayout(context, attrs){
 
+    lateinit var mFilterChipAdapter: FilterChipAdapter
     lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
     lateinit var mLibraryLargeGridBookAdapter: LibraryLargeGridBookAdapter
     lateinit var mLibrarySmallGridBookAdapter: LibrarySmallGridBookAdapter
 
     lateinit var mBookOptionDelegate: BookOptionDelegate
     lateinit var mBookViewHolderDelegate: BookViewHolderDelegate
+    lateinit var mChipDelegate: FilterChipDelegate
 
     override fun onFinishInflate() {
-        setUpChip()
         ivSort.setOnClickListener {
-            setUpBottomsheetForSort()
+            setUpBottomSheetForSort()
 
         }
         ivViewAs.setOnClickListener {
-            setUpBottomsheetForList()
+            setUpBottomSheetForList()
         }
 
         super.onFinishInflate()
@@ -53,7 +55,7 @@ class YourBooksViewPod @JvmOverloads constructor(
         mLibrarySmallGridBookAdapter.setNewData(bookList)
     }
 
-    private fun setUpBottomsheetForList() {
+    private fun setUpBottomSheetForList() {
         val dialog = BottomSheetDialog(context)
         dialog.setContentView(R.layout.bottomsheet_view_as)
         dialog.show()
@@ -80,7 +82,7 @@ class YourBooksViewPod @JvmOverloads constructor(
         }
     }
 
-    private fun setUpBottomsheetForSort() {
+    private fun setUpBottomSheetForSort() {
         val dialog = BottomSheetDialog(context)
         dialog.setContentView(R.layout.bottomsheet_sort)
         dialog.show()
@@ -100,9 +102,11 @@ class YourBooksViewPod @JvmOverloads constructor(
 
     fun setUpYourBooksViewPod(
         bookOptionDelegate: BookOptionDelegate,
-        bookViewHolderDelegate: BookViewHolderDelegate
+        bookViewHolderDelegate: BookViewHolderDelegate,
+        chipDelegate: FilterChipDelegate
     ) {
-        setDelegate(bookOptionDelegate, bookViewHolderDelegate)
+        setDelegate(bookOptionDelegate, bookViewHolderDelegate, chipDelegate)
+        setUpFilterChipRecyclerView()
         setUpListRecyclerView()
         setUpLargeGridRecyclerView()
         setUpSmallGridRecyclerView()
@@ -110,10 +114,18 @@ class YourBooksViewPod @JvmOverloads constructor(
 
     private fun setDelegate(
         bookOptionDelegate: BookOptionDelegate,
-        bookViewHolderDelegate: BookViewHolderDelegate
+        bookViewHolderDelegate: BookViewHolderDelegate,
+        chipDelegate: FilterChipDelegate
     ) {
         this.mBookOptionDelegate = bookOptionDelegate
         this.mBookViewHolderDelegate = bookViewHolderDelegate
+        this.mChipDelegate = chipDelegate
+    }
+
+    private fun setUpFilterChipRecyclerView() {
+        mFilterChipAdapter = FilterChipAdapter(mChipDelegate)
+        rvChip.adapter = mFilterChipAdapter
+        rvChip.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun setUpListRecyclerView() {
@@ -132,21 +144,5 @@ class YourBooksViewPod @JvmOverloads constructor(
         mLibrarySmallGridBookAdapter = LibrarySmallGridBookAdapter(mBookOptionDelegate, mBookViewHolderDelegate)
         rvSmallGrid.adapter = mLibrarySmallGridBookAdapter
         rvSmallGrid.layoutManager = GridLayoutManager(context, 3)
-    }
-
-    private fun setUpChip() {
-        bookChip.forEach {
-            val chip = createChip(it)
-            chipGroupBook.addView(chip)
-        }
-    }
-
-    private fun createChip(label: String): Chip {
-        val chip = LayoutInflater.from(context).inflate(R.layout.filter_chip_book, chipGroupBook, false) as Chip
-        chip.text = label
-        chip.setOnClickListener {
-            Toast.makeText(context, label, Toast.LENGTH_SHORT).show()
-        }
-        return chip
     }
 }

@@ -34,15 +34,15 @@ class BookDetailActivity : AppCompatActivity() {
 
         getExtraFromHomeActivity()
 
-        mBookJson?.let {
-            val book = Gson().fromJson(it, BookVO::class.java)
-
-            tvBookTitleDetail.text = book.title
-        }
+        tvBookTitleDetail.text = mBook?.title
 
     }
 
     private fun getExtraFromHomeActivity() {
         mBookJson = intent?.getStringExtra(EXTRA_BOOK_TITLE)
+
+        mBookJson?.let {
+            mBook = Gson().fromJson(it, BookVO::class.java)
+        }
     }
 }

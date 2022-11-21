@@ -1,5 +1,6 @@
 package com.example.thelibraryapp.views.viewholders
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.thelibraryapp.data.vos.ShelfVO
@@ -16,14 +17,17 @@ class ShelfViewHolder(
         init {
             itemView.setOnClickListener {
                 mShelf?.let {
-                    mShelfViewHolderDelegate.onTapShelf()
+                    mShelfViewHolderDelegate.onTapShelf(it)
                 }
             }
         }
 
+    @SuppressLint("SetTextI18n")
     fun bindData(shelf: ShelfVO) {
         mShelf = shelf
 
+        val bookCount = shelf.books?.count()
         itemView.tvShelfTitle.text = shelf.title
+        itemView.tvBookCount.text = "$bookCount books"
     }
 }

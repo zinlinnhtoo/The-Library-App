@@ -14,6 +14,7 @@ import com.example.thelibraryapp.data.models.BookModelImpl
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
+import com.example.thelibraryapp.delegates.FilterChipDelegate
 import com.example.thelibraryapp.views.viewpods.YourBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 import kotlinx.android.synthetic.main.fragment_book.*
 
 
-class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
+class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate, FilterChipDelegate {
 
     private val mBookModel: BookModel = BookModelImpl
 
@@ -49,7 +50,7 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
 
     private fun setUpViewPods() {
         mYourBooksViewPod = vpYourBooks as YourBooksViewPod
-        mYourBooksViewPod.setUpYourBooksViewPod(this, this)
+        mYourBooksViewPod.setUpYourBooksViewPod(this, this, this)
     }
 
     override fun onTapBookOption() {
@@ -70,5 +71,9 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
             BookDetailActivity.newIntent(it.applicationContext, bookJson)
         })
         activity?.overridePendingTransition(0, 0)
+    }
+
+    override fun tapChip() {
+        Toast.makeText(context, "Tap Chip", Toast.LENGTH_SHORT).show()
     }
 }

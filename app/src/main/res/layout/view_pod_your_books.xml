@@ -4,28 +4,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollChipGroup"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_marginStart="@dimen/margin_medium_2"
-        android:layout_marginEnd="@dimen/margin_medium_2"
-        android:layout_marginTop="@dimen/margin_medium_2">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupBook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:singleLine="true" />
-
-    </HorizontalScrollView>
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:clipToPadding="false"
+        android:paddingEnd="@dimen/margin_medium_2"/>
 
     <RelativeLayout
         android:id="@+id/rlSortAndViewAs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/horizontalScrollChipGroup"
+        android:layout_below="@id/rvChip"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginEnd="@dimen/margin_medium_2">

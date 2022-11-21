@@ -3,7 +3,6 @@ package com.example.thelibraryapp.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ class CreateShelfActivity : AppCompatActivity() {
     private val mShelfModel: ShelfModel = ShelfModelImpl
 
     private var mShelfTitle: String = ""
-    private var bookList = listOf<BookVO>()
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, CreateShelfActivity::class.java)
