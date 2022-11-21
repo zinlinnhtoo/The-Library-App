@@ -32,6 +32,7 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
     lateinit var mYourBooksViewPod: YourBooksViewPod
 
     private var mShelf: ShelfVO? = null
+    private var saveShelf: ShelfVO? = null
     private var mShelfJson: String? = null
 
     companion object {
@@ -56,6 +57,18 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
 
         bindData()
 
+        renameShelf()
+
+        saveShelf?.let { requestData(it) }
+    }
+
+    private fun requestData(shelf: ShelfVO) {
+        mShelfModel.getShelf(shelf.title)?.observe(this) {
+            it.books?.let { bookList -> mYourBooksViewPod.setData(bookList) }
+        }
+    }
+
+    private fun renameShelf() {
         etShelfName.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_DONE) {
                 val newShelf = ShelfVO(
@@ -64,6 +77,7 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
                 )
                 mShelf?.let { mShelfModel.deleteShelf(it) }
                 mShelfModel.insertShelf(newShelf)
+                saveShelf = newShelf
                 super.onBackPressed()
                 return@setOnEditorActionListener true
             }
@@ -85,6 +99,7 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
 
         mShelfJson?.let {
             mShelf = Gson().fromJson(it, ShelfVO::class.java)
+            saveShelf = Gson().fromJson(it, ShelfVO::class.java)
         }
     }
 

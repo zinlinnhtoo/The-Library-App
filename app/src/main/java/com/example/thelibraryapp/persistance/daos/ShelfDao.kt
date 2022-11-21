@@ -18,6 +18,9 @@ interface ShelfDao {
     @Query("SELECT * FROM shelves")
     fun getAllShelves(): LiveData<List<ShelfVO>>
 
+    @Query("SELECT * FROM shelves WHERE title = :title")
+    fun getShelf(title: String): LiveData<ShelfVO>
+
     @Query("DELETE FROM shelves")
     fun deleteAllShelves()
 
