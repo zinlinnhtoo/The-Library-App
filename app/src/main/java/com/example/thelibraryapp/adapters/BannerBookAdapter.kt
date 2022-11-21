@@ -6,18 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.data.vos.BookVO
+import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.views.viewholders.BannerBookViewHolder
 
 class BannerBookAdapter(
-    private val mBookViewHolderDelegate: BookViewHolderDelegate
+    private val mBookViewHolderDelegate: BookViewHolderDelegate,
+    private val mBookOptionDelegate: BookOptionDelegate
 ): Adapter<BannerBookViewHolder>() {
 
     private var mBookList: List<BookVO> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerBookViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_banner_book, parent, false)
-        return BannerBookViewHolder(view, mBookViewHolderDelegate)
+        return BannerBookViewHolder(view, mBookViewHolderDelegate, mBookOptionDelegate)
     }
 
     override fun onBindViewHolder(holder: BannerBookViewHolder, position: Int) {

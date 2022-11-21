@@ -25,7 +25,9 @@ class BookListViewHolder(
         }
 
         itemView.ivOption.setOnClickListener {
-            mOptionDelegate.onTapBookOption()
+            mBook?.let {
+                mOptionDelegate.onTapBookOption(it)
+            }
         }
     }
 

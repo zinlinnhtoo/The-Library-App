@@ -6,7 +6,6 @@ import com.bumptech.glide.Glide
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
-import kotlinx.android.synthetic.main.view_holder_library_list_book.view.*
 import kotlinx.android.synthetic.main.view_holder_library_small_grid_book.view.*
 
 class LibrarySmallGridBookViewHolder(
@@ -26,7 +25,9 @@ class LibrarySmallGridBookViewHolder(
         }
 
         itemView.ivOptionSmallGrid.setOnClickListener {
-            mOptionDelegate.onTapBookOption()
+            mBook?.let {
+                mOptionDelegate.onTapBookOption(it)
+            }
         }
     }
 

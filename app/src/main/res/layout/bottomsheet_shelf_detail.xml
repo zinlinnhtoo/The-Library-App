@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Rename shelf"
-                android:textSize="@dimen/text_regular_3x"
+                android:textSize="@dimen/text_regular"
                 android:textColor="@color/black"/>
 
 
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Delete shelf"
-                android:textSize="@dimen/text_regular_3x"
+                android:textSize="@dimen/text_regular"
                 android:textColor="@color/black"/>
 
 

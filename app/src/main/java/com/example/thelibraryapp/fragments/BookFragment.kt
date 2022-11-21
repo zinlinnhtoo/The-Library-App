@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.activities.BookDetailActivity
@@ -53,15 +54,23 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate, Fil
         mYourBooksViewPod.setUpYourBooksViewPod(this, this, this)
     }
 
-    override fun onTapBookOption() {
+    override fun onTapBookOption(book: BookVO) {
+        val bookJson = Gson().toJson(book)
         val dialog = context?.let { BottomSheetDialog(it) }
         dialog?.setContentView(R.layout.bottomsheet_book_option)
         dialog?.show()
         dialog?.llAddToShelves?.setOnClickListener {
             Toast.makeText(context, "Tap Add To Shelves", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
-            startActivity(context?.let { it1 -> AddToShelvesActivity.newIntent(it1.applicationContext) })
+            startActivity(context?.let { it1 -> AddToShelvesActivity.newIntent(it1.applicationContext, bookJson) })
             activity?.overridePendingTransition(0, 0)
+        }
+        dialog?.tvBottomSheetBookTitle?.text = book.title
+        dialog?.tvBottomSheetBookAuthor?.text = book.author
+        dialog?.ivBottomSheetBook?.let {
+            Glide.with(this)
+                .load("${book.bookImage}")
+                .into(it)
         }
     }
 

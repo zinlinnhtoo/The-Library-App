@@ -39,4 +39,38 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/btnAddToShelves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="64dp"
+        android:elevation="@dimen/margin_medium_2"
+        android:background="@drawable/background_create_shelf">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAddToShelves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_outline_create_24dp_white"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_centerVertical="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddToShelves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/ivAddToShelves"
+            android:text="Create new"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

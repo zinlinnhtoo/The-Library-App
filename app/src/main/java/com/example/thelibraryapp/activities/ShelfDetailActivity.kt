@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.data.models.ShelfModel
 import com.example.thelibraryapp.data.models.ShelfModelImpl
@@ -122,15 +123,21 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
         mYourBooksViewPod.setUpYourBooksViewPod(this, this, this)
     }
 
-    override fun onTapBookOption() {
+    override fun onTapBookOption(book: BookVO) {
+        val bookJson = Gson().toJson(book)
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.bottomsheet_book_option)
         dialog.show()
         dialog.llAddToShelves.setOnClickListener {
             dialog.dismiss()
-            startActivity(AddToShelvesActivity.newIntent(this))
+            startActivity(AddToShelvesActivity.newIntent(this, bookJson))
             overridePendingTransition(0, 0)
         }
+        dialog.tvBottomSheetBookTitle.text = book.title
+        dialog.tvBottomSheetBookAuthor.text = book.author
+        Glide.with(this)
+            .load("${book.bookImage}")
+            .into(dialog.ivBottomSheetBook)
     }
 
     override fun onTapBook(book: BookVO) {

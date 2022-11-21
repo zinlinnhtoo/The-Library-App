@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.BannerBookAdapter
 import com.example.thelibraryapp.adapters.BookCategoryAdapter
@@ -22,6 +23,7 @@ import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
+import kotlinx.android.synthetic.main.view_holder_book_list.view.*
 
 class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate, BookViewHolderDelegate {
 
@@ -68,15 +70,21 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
         }
     }
 
-    private fun showBottomSheetDialog() {
+    private fun showBottomSheetDialog(book: BookVO) {
+        val bookJson = Gson().toJson(book)
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.bottomsheet_book_option)
         dialog.show()
         dialog.llAddToShelves?.setOnClickListener {
             dialog.dismiss()
-            startActivity(AddToShelvesActivity.newIntent(this))
+            startActivity(AddToShelvesActivity.newIntent(this, bookJson))
             overridePendingTransition(0, 0)
         }
+        dialog.tvBottomSheetBookTitle.text = book.title
+        dialog.tvBottomSheetBookAuthor.text = book.author
+        Glide.with(this)
+            .load("${book.bookImage}")
+            .into(dialog.ivBottomSheetBook)
     }
 
     private fun setUpBookCategoryRecyclerView() {
@@ -96,7 +104,7 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     }
 
     private fun setUpBannerBookCarouselRecyclerView() {
-        mBannerBookAdapter = BannerBookAdapter(this)
+        mBannerBookAdapter = BannerBookAdapter(this, this)
         rvBannerBook.adapter = mBannerBookAdapter
         rvBannerBook.setIntervalRatio(0.8f)
         mBannerCarouselLayoutManager = rvBannerBook.getCarouselLayoutManager()
@@ -119,8 +127,8 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
         }
     }
 
-    override fun onTapBookOption() {
-        showBottomSheetDialog()
+    override fun onTapBookOption(book: BookVO) {
+        showBottomSheetDialog(book)
     }
 
 
