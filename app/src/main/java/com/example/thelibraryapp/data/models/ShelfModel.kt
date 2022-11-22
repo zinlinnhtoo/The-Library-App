@@ -1,6 +1,5 @@
 package com.example.thelibraryapp.data.models
 
-import android.icu.text.CaseMap.Title
 import androidx.lifecycle.LiveData
 import com.example.thelibraryapp.data.vos.ShelfVO
 
@@ -14,7 +13,12 @@ interface ShelfModel {
 
     fun getShelf(
         title: String
-    ): LiveData<ShelfVO>?
+    ): LiveData<ShelfVO?>?
+
+    fun renameShelf(
+        newTitle: String,
+        oldTitle: String
+    )
 
     fun deleteShelf(shelf: ShelfVO)
 }

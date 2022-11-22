@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.AddToShelvesAdapter
@@ -23,7 +22,7 @@ class AddToShelvesActivity : AppCompatActivity(), AddToShelfCheckboxDelegate {
 
     private val mShelfModel: ShelfModel = ShelfModelImpl
 
-    private var mShelfTitle = mutableListOf<ShelfVO>()
+    private var mShelfList = mutableListOf<ShelfVO>()
 
     private var mBook: BookVO? = null
     private var mBookJson: String? = null
@@ -67,15 +66,15 @@ class AddToShelvesActivity : AppCompatActivity(), AddToShelfCheckboxDelegate {
         btnClose.setOnClickListener {
             finish()
         }
-        
+
         btnAddToShelves.setOnClickListener {
-//            Toast.makeText(this, "${mShelfTitle.forEach { it.title }}", Toast.LENGTH_SHORT).show()
-            mShelfTitle.forEach { shelfVO->
+            mShelfList.forEach { shelf ->
                 mBook?.let { book ->
-                    val shelf = ShelfVO(shelfVO.title, shelfVO.books?.plus(book))
+                    if (shelf.books?.contains(book) == false) {
+                        shelf.books.add(book)
+                    }
                     mShelfModel.insertShelf(shelf)
                 }
-
             }
             super.onBackPressed()
         }
@@ -90,9 +89,9 @@ class AddToShelvesActivity : AppCompatActivity(), AddToShelfCheckboxDelegate {
 
     override fun onCheckedCheckbox(shelf: ShelfVO, isChecked: Boolean) {
         if (isChecked) {
-            mShelfTitle.add(shelf)
+            mShelfList.add(shelf)
         } else {
-            mShelfTitle.remove(shelf)
+            mShelfList.remove(shelf)
         }
     }
 }

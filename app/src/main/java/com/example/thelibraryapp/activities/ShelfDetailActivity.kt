@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -32,7 +33,6 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
     lateinit var mYourBooksViewPod: YourBooksViewPod
 
     private var mShelf: ShelfVO? = null
-    private var saveShelf: ShelfVO? = null
     private var mShelfJson: String? = null
 
     companion object {
@@ -59,25 +59,25 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
 
         renameShelf()
 
-        saveShelf?.let { requestData(it) }
+        mShelf?.let { requestData(it) }
     }
 
     private fun requestData(shelf: ShelfVO) {
-        mShelfModel.getShelf(shelf.title)?.observe(this) {
-            it.books?.let { bookList -> mYourBooksViewPod.setData(bookList) }
+        mShelfModel.getShelf(shelf.title)?.observe(this) { shelf ->
+            shelf?.let {
+                it.books?.let { bookList -> mYourBooksViewPod.setData(bookList.toList()) }
+            }
         }
     }
 
     private fun renameShelf() {
         etShelfName.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_DONE) {
-                val newShelf = ShelfVO(
-                    title = etShelfName.text.toString(),
-                    books = mShelf?.books
-                )
-                mShelf?.let { mShelfModel.deleteShelf(it) }
-                mShelfModel.insertShelf(newShelf)
-                saveShelf = newShelf
+                val newShelfTitle = etShelfName.text.toString()
+                mShelf?.title?.let { mShelfModel.renameShelf(newShelfTitle, it) }
+                mShelfModel.getShelf(newShelfTitle)?.observe(this) {
+                    mShelf = it
+                }
                 super.onBackPressed()
                 return@setOnEditorActionListener true
             }
@@ -99,7 +99,6 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
 
         mShelfJson?.let {
             mShelf = Gson().fromJson(it, ShelfVO::class.java)
-            saveShelf = Gson().fromJson(it, ShelfVO::class.java)
         }
     }
 
@@ -123,8 +122,8 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
             }
             dialog.tvDeleteShelf.setOnClickListener {
                 mShelf?.let { it1 -> mShelfModel.deleteShelf(it1) }
+                finish()
                 dialog.dismiss()
-                super.onBackPressed()
             }
         }
 

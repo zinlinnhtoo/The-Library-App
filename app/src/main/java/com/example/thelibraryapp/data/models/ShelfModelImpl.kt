@@ -12,11 +12,15 @@ object ShelfModelImpl: BaseModel(), ShelfModel {
         return mTheLibraryDatabase?.shelfDao()?.getAllShelves()
     }
 
-    override fun getShelf(title: String): LiveData<ShelfVO>? {
+    override fun getShelf(title: String): LiveData<ShelfVO?>? {
         return mTheLibraryDatabase?.shelfDao()?.getShelf(title)
     }
 
+    override fun renameShelf(newTitle: String, oldTitle: String) {
+        mTheLibraryDatabase?.shelfDao()?.renameShelf(newTitle, oldTitle)
+    }
+
     override fun deleteShelf(shelf: ShelfVO) {
-        mTheLibraryDatabase?.shelfDao()?.deleteShelf(shelf)
+        mTheLibraryDatabase?.shelfDao()?.deleteShelf(shelf.title)
     }
 }

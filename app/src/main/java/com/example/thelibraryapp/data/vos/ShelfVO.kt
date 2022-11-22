@@ -20,5 +20,5 @@ data class ShelfVO(
     var title: String,
 
     @ColumnInfo(name = "books")
-    val books: List<BookVO>?
+    val books: MutableList<BookVO>?
 )

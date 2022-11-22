@@ -38,7 +38,7 @@ class CreateShelfActivity : AppCompatActivity() {
         etShelfName.setOnEditorActionListener { _, i, _ ->
             if(i == EditorInfo.IME_ACTION_DONE) {
                 mShelfTitle = etShelfName.text.toString()
-                mShelfModel.insertShelf(ShelfVO(mShelfTitle, listOf()))
+                mShelfModel.insertShelf(ShelfVO(mShelfTitle, mutableListOf()))
                 finish()
                 return@setOnEditorActionListener true
             }
