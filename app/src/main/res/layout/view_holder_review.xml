@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/margin_medium_2">
+    
+    <com.example.thelibraryapp.views.components.CircularProfileImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/avatar"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_toEndOf="@id/ivProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Steven Gomez"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/margin_medium_2"/>
+
+    <RatingBar
+        android:id="@+id/rbRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_below="@id/tvName"
+        android:layout_alignStart="@id/tvName"
+        android:theme="@style/RatingBarColorAccent"
+        android:rating="5"
+        android:numStars="5"
+        android:layout_marginTop="@dimen/margin_small"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/rbRating"
+        android:layout_alignTop="@id/rbRating"
+        android:layout_marginStart="@dimen/margin_small"
+        android:text="5/12/2022"/>
+
+    <TextView
+        android:id="@+id/tvReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rbRating"
+        android:layout_alignStart="@id/rbRating"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:text="Has to buy the book for class. really convenient. execellent book btw"/>
+</RelativeLayout>

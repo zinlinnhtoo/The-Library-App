@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.thelibraryapp.R
+import com.example.thelibraryapp.adapters.ReviewAdapter
 import com.example.thelibraryapp.data.vos.BookVO
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_book_detail.*
@@ -15,6 +18,8 @@ class BookDetailActivity : AppCompatActivity() {
 
     //intent extra from HomeActivity
     private var mBookJson: String? = null
+
+    private lateinit var mReviewAdapter: ReviewAdapter
 
 
 
@@ -34,8 +39,27 @@ class BookDetailActivity : AppCompatActivity() {
 
         getExtraFromHomeActivity()
 
-        tvBookTitleDetail.text = mBook?.title
+        bindData()
 
+
+        setUpReviewRecyclerView()
+
+    }
+
+    private fun bindData() {
+        tvBookTitleDetail.text = mBook?.title
+        tvAuthor.text = mBook?.author
+        tvBookCategory.text = mBook?.bookCategory
+        Glide.with(this)
+            .load(mBook?.bookImage)
+            .into(ivBookDetail)
+        tvBookDetail.text = mBook?.description
+    }
+
+    private fun setUpReviewRecyclerView() {
+        mReviewAdapter = ReviewAdapter()
+        rvReview.adapter = mReviewAdapter
+        rvReview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun getExtraFromHomeActivity() {
