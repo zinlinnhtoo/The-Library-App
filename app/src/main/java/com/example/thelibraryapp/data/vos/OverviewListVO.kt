@@ -31,6 +31,9 @@ data class OverviewListVO(
 
     @SerializedName("books")
     @ColumnInfo(name = "book")
-    val books: List<BookVO>?
+    val books: List<BookVO>?,
+
+    @SerializedName("book_details")
+    val bookDetailList: List<BookVO>?
 
 )

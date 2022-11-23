@@ -15,4 +15,9 @@ interface BookModel {
     )
 
     fun getReadBook(): LiveData<List<BookVO>>?
+
+    fun getBookListByListName(
+        list: String,
+        onFailure: (String) -> Unit
+    ): LiveData<List<OverviewListVO>>?
 }

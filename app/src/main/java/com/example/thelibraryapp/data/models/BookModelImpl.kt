@@ -39,4 +39,22 @@ object BookModelImpl : BaseModel(), BookModel {
         return mTheLibraryDatabase?.bookDao()?.getAllBooks()
     }
 
+    override fun getBookListByListName(
+        list: String,
+        onFailure: (String) -> Unit
+    ): LiveData<List<OverviewListVO>>? {
+        mNewYorkTimesApi.getBookByListName(
+            list = list
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    
+                },
+                {
+                    onFailure(it.localizedMessage.orEmpty())
+                }
+            )
+    }
+
 }
