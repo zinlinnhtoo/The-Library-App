@@ -28,7 +28,7 @@ class CategoryBookListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 15
+        return mBookList.count()
     }
 
     fun setNewData(bookList: List<BookVO>) {

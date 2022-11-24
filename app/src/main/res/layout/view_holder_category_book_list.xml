@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             app:cornerRadius="20dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/book"/>
+            app:srcCompat="@drawable/placeholder_book"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivOptionInCategory"
@@ -41,6 +41,8 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:textSize="@dimen/text_regular_2x"
         android:textAllCaps="false"
+        android:gravity="center"
+        android:maxLines="2"
         android:text="HOTD: Fire &amp; Blood"/>
 
 </RelativeLayout>
