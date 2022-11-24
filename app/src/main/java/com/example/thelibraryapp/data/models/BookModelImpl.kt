@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.data.vos.OverviewListVO
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 object BookModelImpl : BaseModel(), BookModel {
@@ -56,6 +57,17 @@ object BookModelImpl : BaseModel(), BookModel {
                     onFailure(it.localizedMessage.orEmpty())
                 }
             )
+    }
+
+    override fun searchGoogleBook(q: String): Observable<List<BookVO>> {
+        return mGoogleBookApi.searchGoogleBook(q).map {
+            it.items?.map {
+                Log.println(Log.INFO, "ItemVO", it.toString())
+                it.toBookVO()
+            }?: listOf()
+        }.onErrorResumeNext {
+            Observable.just(listOf())
+        }.subscribeOn(Schedulers.io())
     }
 
 }
