@@ -44,6 +44,10 @@ class BookDetailActivity : AppCompatActivity() {
 
         setUpReviewRecyclerView()
 
+        btnBack.setOnClickListener {
+            super.onBackPressed()
+        }
+
     }
 
     private fun bindData() {

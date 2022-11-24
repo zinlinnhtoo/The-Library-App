@@ -5,15 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.data.vos.BookVO
+import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.views.viewholders.BookSearchViewHolder
 
-class BookSearchAdapter: Adapter<BookSearchViewHolder>() {
+class BookSearchAdapter(
+    private val mBookViewHolderDelegate: BookViewHolderDelegate
+): Adapter<BookSearchViewHolder>() {
 
     private var mBookList: List<BookVO> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookSearchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_search_book, parent, false)
-        return BookSearchViewHolder(view)
+        return BookSearchViewHolder(view, mBookViewHolderDelegate)
     }
 
     override fun onBindViewHolder(holder: BookSearchViewHolder, position: Int) {

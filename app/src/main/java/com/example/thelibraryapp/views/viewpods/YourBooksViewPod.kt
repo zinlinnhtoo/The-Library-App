@@ -2,7 +2,7 @@ package com.example.thelibraryapp.views.viewpods
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,19 +13,18 @@ import com.example.thelibraryapp.adapters.LibraryLargeGridBookAdapter
 import com.example.thelibraryapp.adapters.LibraryListBookAdapter
 import com.example.thelibraryapp.adapters.LibrarySmallGridBookAdapter
 import com.example.thelibraryapp.data.vos.BookVO
+import com.example.thelibraryapp.data.vos.CategoryVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
 import com.example.thelibraryapp.delegates.FilterChipDelegate
-import com.example.thelibraryapp.dummy.bookChip
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.bottomsheet_sort.*
 import kotlinx.android.synthetic.main.bottomsheet_view_as.*
 import kotlinx.android.synthetic.main.view_pod_your_books.view.*
 
 class YourBooksViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : RelativeLayout(context, attrs){
+) : RelativeLayout(context, attrs), FilterChipDelegate{
 
     lateinit var mFilterChipAdapter: FilterChipAdapter
     lateinit var mLibraryListBookAdapter: LibraryListBookAdapter
@@ -34,7 +33,12 @@ class YourBooksViewPod @JvmOverloads constructor(
 
     lateinit var mBookOptionDelegate: BookOptionDelegate
     lateinit var mBookViewHolderDelegate: BookViewHolderDelegate
-    lateinit var mChipDelegate: FilterChipDelegate
+
+    var mBookList: List<BookVO> = listOf()
+    var mSortedBookList: List<BookVO> = listOf()
+    var mCategoryList: MutableList<String> = mutableListOf()
+    var mCategoryVOList: MutableList<CategoryVO> = mutableListOf()
+    var mCategorySortedList: MutableList<CategoryVO> = mutableListOf()
 
     override fun onFinishInflate() {
         ivSort.setOnClickListener {
@@ -44,12 +48,31 @@ class YourBooksViewPod @JvmOverloads constructor(
         ivViewAs.setOnClickListener {
             setUpBottomSheetForList()
         }
+        btnClearFilter.setOnClickListener {
+            setData(mBookList)
+            btnClearFilter.visibility = View.GONE
+        }
 
         super.onFinishInflate()
 
     }
 
     fun setData(bookList: List<BookVO>) {
+        mBookList = bookList
+        mSortedBookList = bookList
+        bookList.forEach {
+            mCategoryList.add(it.bookCategory.orEmpty())
+        }
+        val distinctCategoryList = mCategoryList.distinct()
+        distinctCategoryList.forEach {
+            mCategoryVOList.add(CategoryVO(category = it))
+            mCategorySortedList.add(CategoryVO(category = it))
+        }
+        mFilterChipAdapter.setNewData(mCategoryVOList.distinct())
+        setUpDataForRecyclerView(bookList)
+    }
+
+    private fun setUpDataForRecyclerView(bookList: List<BookVO>) {
         mLibraryListBookAdapter.setNewData(bookList)
         mLibraryLargeGridBookAdapter.setNewData(bookList)
         mLibrarySmallGridBookAdapter.setNewData(bookList)
@@ -88,14 +111,23 @@ class YourBooksViewPod @JvmOverloads constructor(
         dialog.show()
         dialog.rbRecent.setOnClickListener {
             Toast.makeText(context, "Recent", Toast.LENGTH_SHORT).show()
+            val sortedListByDate = mSortedBookList
+            setData(sortedListByDate)
+            tvSort.text = "Sort by: Recent"
             dialog.dismiss()
         }
         dialog.rbTitle.setOnClickListener {
             Toast.makeText(context, "Title", Toast.LENGTH_SHORT).show()
+            val sortedListByTitle = mSortedBookList.sortedBy { it.title }
+            setData(sortedListByTitle)
+            tvSort.text = "Sort by: Title"
             dialog.dismiss()
         }
         dialog.rbAuthor.setOnClickListener {
             Toast.makeText(context, "Author", Toast.LENGTH_SHORT).show()
+            val sortedListByAuthor = mSortedBookList.sortedBy { it.author }
+            setData(sortedListByAuthor)
+            tvSort.text = "Sort by: Author"
             dialog.dismiss()
         }
     }
@@ -103,9 +135,8 @@ class YourBooksViewPod @JvmOverloads constructor(
     fun setUpYourBooksViewPod(
         bookOptionDelegate: BookOptionDelegate,
         bookViewHolderDelegate: BookViewHolderDelegate,
-        chipDelegate: FilterChipDelegate
     ) {
-        setDelegate(bookOptionDelegate, bookViewHolderDelegate, chipDelegate)
+        setDelegate(bookOptionDelegate, bookViewHolderDelegate)
         setUpFilterChipRecyclerView()
         setUpListRecyclerView()
         setUpLargeGridRecyclerView()
@@ -115,15 +146,13 @@ class YourBooksViewPod @JvmOverloads constructor(
     private fun setDelegate(
         bookOptionDelegate: BookOptionDelegate,
         bookViewHolderDelegate: BookViewHolderDelegate,
-        chipDelegate: FilterChipDelegate
     ) {
         this.mBookOptionDelegate = bookOptionDelegate
         this.mBookViewHolderDelegate = bookViewHolderDelegate
-        this.mChipDelegate = chipDelegate
     }
 
     private fun setUpFilterChipRecyclerView() {
-        mFilterChipAdapter = FilterChipAdapter(mChipDelegate)
+        mFilterChipAdapter = FilterChipAdapter(this)
         rvChip.adapter = mFilterChipAdapter
         rvChip.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
@@ -144,5 +173,26 @@ class YourBooksViewPod @JvmOverloads constructor(
         mLibrarySmallGridBookAdapter = LibrarySmallGridBookAdapter(mBookOptionDelegate, mBookViewHolderDelegate)
         rvSmallGrid.adapter = mLibrarySmallGridBookAdapter
         rvSmallGrid.layoutManager = GridLayoutManager(context, 3)
+    }
+
+    override fun onTapChip(category: CategoryVO) {
+        if (category.isChecked) {
+            btnClearFilter.visibility = View.GONE
+            mFilterChipAdapter.setNewData(mCategoryVOList)
+            setUpDataForRecyclerView(mBookList)
+            mSortedBookList = mBookList
+        } else {
+            btnClearFilter.visibility = View.VISIBLE
+            mSortedBookList = mBookList.filter { it.bookCategory == category.category }
+            Toast.makeText(context, category.isChecked.toString(), Toast.LENGTH_SHORT).show()
+            setUpDataForRecyclerView(mSortedBookList    )
+            mCategorySortedList.forEach{
+                if (it.category == category.category) {
+                    it.isChecked = it.isChecked != true
+                } else it.isChecked = false
+            }
+            val sortedCategory = mCategorySortedList.sortedByDescending { it.isChecked }
+            mFilterChipAdapter.setNewData(sortedCategory.distinctBy { it.category })
+        }
     }
 }

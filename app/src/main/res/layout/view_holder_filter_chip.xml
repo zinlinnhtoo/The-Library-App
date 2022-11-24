@@ -5,13 +5,13 @@
     android:layout_marginStart="@dimen/margin_medium_2">
 
     <TextView
+        android:id="@+id/categoryChip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ebook"
         android:layout_centerInParent="true"
         android:background="@drawable/background_chip"
         android:padding="8dp"
-        android:textSize="@dimen/text_smaller"
-        />
+        android:text="Ebook"
+        android:textSize="@dimen/text_smaller" />
 
 </RelativeLayout>

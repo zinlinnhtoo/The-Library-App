@@ -4,12 +4,24 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnClearFilter"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_close_24dp_black"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_alignTop="@id/rvChip"
+        android:layout_alignBottom="@id/rvChip"
+        android:background="@drawable/background_chip"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:clipToPadding="false"
+        android:layout_toEndOf="@id/btnClearFilter"
         android:paddingEnd="@dimen/margin_medium_2"/>
 
     <RelativeLayout

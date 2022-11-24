@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -14,6 +13,7 @@ import com.example.thelibraryapp.R
 import com.example.thelibraryapp.data.models.ShelfModel
 import com.example.thelibraryapp.data.models.ShelfModelImpl
 import com.example.thelibraryapp.data.vos.BookVO
+import com.example.thelibraryapp.data.vos.CategoryVO
 import com.example.thelibraryapp.data.vos.ShelfVO
 import com.example.thelibraryapp.delegates.BookOptionDelegate
 import com.example.thelibraryapp.delegates.BookViewHolderDelegate
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_shelf_detail.tvShelfName
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 import kotlinx.android.synthetic.main.bottomsheet_shelf_detail.*
 
-class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHolderDelegate, FilterChipDelegate {
+class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHolderDelegate {
 
     private val mShelfModel: ShelfModel = ShelfModelImpl
 
@@ -134,7 +134,7 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
 
     private fun setUpViewPod() {
         mYourBooksViewPod = vpYourBooks as YourBooksViewPod
-        mYourBooksViewPod.setUpYourBooksViewPod(this, this, this)
+        mYourBooksViewPod.setUpYourBooksViewPod(this, this)
     }
 
     override fun onTapBookOption(book: BookVO) {
@@ -158,9 +158,5 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
         val bookJson = Gson().toJson(book)
         startActivity(BookDetailActivity.newIntent(this, bookJson))
         overridePendingTransition(0, 0)
-    }
-
-    override fun tapChip() {
-        Toast.makeText(this, "Tap Chip", Toast.LENGTH_SHORT).show()
     }
 }
