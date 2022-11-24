@@ -36,13 +36,15 @@
                     android:layout_marginEnd="@dimen/margin_medium_2"
                     app:srcCompat="@drawable/ic_baseline_search_24dp_black" />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/etSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_toEndOf="@id/icSearch"
                     android:background="@null"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_regular_2x"
                     android:hint="Search Play Books" />
 
                 <com.example.thelibraryapp.views.components.CircularProfileImageView

@@ -54,6 +54,10 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
 
         requestData()
 
+        rlSearchBar.setOnClickListener {
+            startActivity(BookSearchActivity.newIntent(this))
+        }
+
     }
 
     private fun requestData() {

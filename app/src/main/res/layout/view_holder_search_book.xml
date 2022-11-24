@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <com.example.thelibraryapp.views.components.RoundedCornerImageView
+        android:id="@+id/ivBook"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        app:cornerRadius="8dp"
+        app:srcCompat="@drawable/placeholder_book"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBookTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ivBook"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:maxLines="1"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:text="Book Title"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBookTitle"
+        android:layout_alignStart="@id/tvBookTitle"
+        android:text="Book Author"
+        android:layout_marginTop="@dimen/margin_small"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBookType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book Type"
+        android:layout_below="@id/tvAuthor"
+        android:layout_alignStart="@id/tvBookTitle"/>
+
+</RelativeLayout>
