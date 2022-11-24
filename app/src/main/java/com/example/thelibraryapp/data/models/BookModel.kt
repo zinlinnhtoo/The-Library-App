@@ -18,6 +18,7 @@ interface BookModel {
 
     fun getBookListByListName(
         list: String,
+        onSuccess: (List<OverviewListVO>) -> Unit,
         onFailure: (String) -> Unit
-    ): LiveData<List<OverviewListVO>>?
+    )
 }

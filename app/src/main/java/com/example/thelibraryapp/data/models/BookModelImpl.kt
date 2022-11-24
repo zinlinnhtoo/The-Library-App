@@ -41,15 +41,16 @@ object BookModelImpl : BaseModel(), BookModel {
 
     override fun getBookListByListName(
         list: String,
+        onSuccess: (List<OverviewListVO>) -> Unit,
         onFailure: (String) -> Unit
-    ): LiveData<List<OverviewListVO>>? {
+    ) {
         mNewYorkTimesApi.getBookByListName(
             list = list
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    
+                    it.results?.let { it1 -> onSuccess(it1) }
                 },
                 {
                     onFailure(it.localizedMessage.orEmpty())

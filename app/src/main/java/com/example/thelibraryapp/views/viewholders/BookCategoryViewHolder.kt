@@ -24,7 +24,9 @@ class BookCategoryViewHolder(
 
     init {
         itemView.llCategoryTitle.setOnClickListener {
-            mCategoryDelegate.onTapCategory()
+            mOverviewList?.listName?.let {
+                mCategoryDelegate.onTapCategory(it)
+            }
         }
     }
 

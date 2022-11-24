@@ -35,7 +35,10 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/text_regular_3x"
                 android:textColor="@color/black"
-                android:layout_centerHorizontal="true"/>
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:maxLines="1"
+                android:layout_centerInParent="true"/>
 
         </RelativeLayout>
 

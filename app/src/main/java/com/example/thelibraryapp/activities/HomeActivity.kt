@@ -23,7 +23,6 @@ import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.bottomNav
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
-import kotlinx.android.synthetic.main.view_holder_book_list.view.*
 
 class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelegate, BookViewHolderDelegate {
 
@@ -132,8 +131,8 @@ class HomeActivity : AppCompatActivity(), BookOptionDelegate, GoToCategoryDelega
     }
 
 
-    override fun onTapCategory() {
-        startActivity(BookCategoryActivity.newIntent(this@HomeActivity))
+    override fun onTapCategory(categoryTitle: String) {
+        startActivity(BookCategoryActivity.newIntent(this@HomeActivity, categoryTitle))
     }
 
     override fun onTapBook(book: BookVO) {
