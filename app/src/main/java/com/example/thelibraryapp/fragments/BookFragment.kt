@@ -1,32 +1,31 @@
 package com.example.thelibraryapp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.activities.AddToShelvesActivity
 import com.example.thelibraryapp.activities.BookDetailActivity
-import com.example.thelibraryapp.data.models.BookModel
-import com.example.thelibraryapp.data.models.BookModelImpl
 import com.example.thelibraryapp.data.vos.BookVO
-import com.example.thelibraryapp.data.vos.CategoryVO
-import com.example.thelibraryapp.delegates.BookOptionDelegate
-import com.example.thelibraryapp.delegates.BookViewHolderDelegate
-import com.example.thelibraryapp.delegates.FilterChipDelegate
+import com.example.thelibraryapp.mvp.presenters.BookPresenter
+import com.example.thelibraryapp.mvp.presenters.BookPresenterImpl
+import com.example.thelibraryapp.mvp.views.BookView
 import com.example.thelibraryapp.views.viewpods.YourBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.bottomsheet_book_option.*
 import kotlinx.android.synthetic.main.fragment_book.*
 
 
-class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
+class BookFragment : Fragment(), BookView {
 
-    private val mBookModel: BookModel = BookModelImpl
+    private lateinit var mPresenter: BookPresenter
 
     lateinit var mYourBooksViewPod: YourBooksViewPod
 
@@ -40,22 +39,27 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpPresenter()
         setUpViewPods()
-        requestData()
+        mPresenter.onUiReady(this)
     }
 
-    private fun requestData() {
-        mBookModel.getReadBook()?.observe(viewLifecycleOwner) {
-            mYourBooksViewPod.setData(it)
-        }
+    private fun setUpPresenter() {
+        mPresenter = ViewModelProvider(this)[BookPresenterImpl::class.java]
+        mPresenter.initView(this)
     }
 
     private fun setUpViewPods() {
         mYourBooksViewPod = vpYourBooks as YourBooksViewPod
-        mYourBooksViewPod.setUpYourBooksViewPod(this, this)
+        mYourBooksViewPod.setUpYourBooksViewPod(mPresenter, mPresenter)
     }
 
-    override fun onTapBookOption(book: BookVO) {
+    override fun showBookList(booList: List<BookVO>) {
+        mYourBooksViewPod.setData(booList)
+    }
+
+    override fun navigateToAddToShelf(book: BookVO) {
         val bookJson = Gson().toJson(book)
         val dialog = context?.let { BottomSheetDialog(it) }
         dialog?.setContentView(R.layout.bottomsheet_book_option)
@@ -75,11 +79,15 @@ class BookFragment : Fragment(), BookOptionDelegate, BookViewHolderDelegate {
         }
     }
 
-    override fun onTapBook(book: BookVO) {
+    override fun navigateToBookDetail(book: BookVO) {
         val bookJson = Gson().toJson(book)
         startActivity(context?.let {
             BookDetailActivity.newIntent(it.applicationContext, bookJson)
         })
         activity?.overridePendingTransition(0, 0)
+    }
+
+    override fun showError(errorString: String) {
+        Snackbar.make(requireActivity().window.decorView, errorString, Snackbar.LENGTH_LONG).show()
     }
 }
