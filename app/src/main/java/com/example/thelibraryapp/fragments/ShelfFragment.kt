@@ -5,21 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.activities.CreateShelfActivity
 import com.example.thelibraryapp.activities.ShelfDetailActivity
 import com.example.thelibraryapp.adapters.ShelfAdapter
-import com.example.thelibraryapp.data.models.ShelfModel
-import com.example.thelibraryapp.data.models.ShelfModelImpl
 import com.example.thelibraryapp.data.vos.ShelfVO
-import com.example.thelibraryapp.delegates.ShelfViewHolderDelegate
+import com.example.thelibraryapp.mvp.presenters.ShelfPresenter
+import com.example.thelibraryapp.mvp.presenters.ShelfPresenterImpl
+import com.example.thelibraryapp.mvp.views.ShelfView
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_shelf.*
 
-class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
+class ShelfFragment : Fragment(), ShelfView {
 
-    private val mShelfModel: ShelfModel = ShelfModelImpl
+    private lateinit var mPresenter: ShelfPresenter
 
     private lateinit var mShelfAdapter : ShelfAdapter
 
@@ -32,33 +34,48 @@ class ShelfFragment : Fragment(), ShelfViewHolderDelegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpPresenter()
+
         setUpRecyclerView()
         setUpListener()
-        requestData()
+
+        mPresenter.onUiReady(this)
     }
 
-    private fun requestData() {
-        mShelfModel.getAllShelves()?.observe(viewLifecycleOwner) {
-            mShelfAdapter.setNewData(it)
-        }
+    private fun setUpPresenter() {
+        mPresenter = ViewModelProvider(this)[ShelfPresenterImpl::class.java]
+        mPresenter.initView(this)
     }
 
     private fun setUpRecyclerView() {
-        mShelfAdapter = ShelfAdapter(this)
+        mShelfAdapter = ShelfAdapter(mPresenter)
         rvShelf.adapter = mShelfAdapter
         rvShelf.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun setUpListener() {
         btnCreateShelf.setOnClickListener {
-            startActivity(context?.let { it1 -> CreateShelfActivity.newIntent(it1.applicationContext) })
-            activity?.overridePendingTransition(0, 0)
+            mPresenter.onTapCreateShelf()
         }
     }
 
-    override fun onTapShelf(shelf: ShelfVO) {
+    override fun showShelfList(shelfList: List<ShelfVO>) {
+        mShelfAdapter.setNewData(shelfList)
+    }
+
+    override fun navigateToShelfDetail(shelf: ShelfVO) {
         val shelfJson = Gson().toJson(shelf)
         startActivity(context?.let { it -> ShelfDetailActivity.newIntent(it.applicationContext, shelfJson) })
         activity?.overridePendingTransition(0, 0)
+    }
+
+    override fun navigateToCreateShelfScreen() {
+        startActivity(context?.let { it1 -> CreateShelfActivity.newIntent(it1.applicationContext) })
+        activity?.overridePendingTransition(0, 0)
+    }
+
+    override fun showError(errorString: String) {
+        Snackbar.make(requireActivity().window.decorView, errorString, Snackbar.LENGTH_LONG).show()
     }
 }

@@ -2,31 +2,28 @@ package com.example.thelibraryapp.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.AddToShelvesAdapter
-import com.example.thelibraryapp.data.models.ShelfModel
-import com.example.thelibraryapp.data.models.ShelfModelImpl
 import com.example.thelibraryapp.data.vos.BookVO
 import com.example.thelibraryapp.data.vos.ShelfVO
-import com.example.thelibraryapp.delegates.AddToShelfCheckboxDelegate
+import com.example.thelibraryapp.mvp.presenters.AddToShelfPresenter
+import com.example.thelibraryapp.mvp.presenters.AddToShelfPresenterImpl
+import com.example.thelibraryapp.mvp.views.AddToShelfView
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_add_to_shelves.*
 
-class AddToShelvesActivity : AppCompatActivity(), AddToShelfCheckboxDelegate {
+class AddToShelvesActivity : AppCompatActivity(), AddToShelfView {
 
 
     private lateinit var mAddToShelvesAdapter: AddToShelvesAdapter
-
-    private val mShelfModel: ShelfModel = ShelfModelImpl
-
-    private var mShelfList = mutableListOf<ShelfVO>()
-
-    private var mBook: BookVO? = null
     private var mBookJson: String? = null
 
+    private lateinit var mPresenter: AddToShelfPresenter
 
     companion object {
         const val EXTRA_BOOK_ADD_TO_SHELVES = "EXTRA_BOOK_ADD_TO_SHELVES"
@@ -41,57 +38,57 @@ class AddToShelvesActivity : AppCompatActivity(), AddToShelfCheckboxDelegate {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_to_shelves)
 
+        setUpPresenter()
+
         getExtra()
         setUpRecyclerView()
         setUpListener()
-        requestData()
+
+        mPresenter.onUiReady(this)
+    }
+
+    private fun setUpPresenter() {
+        mPresenter = ViewModelProvider(this)[AddToShelfPresenterImpl::class.java]
+        mPresenter.initView(this)
     }
 
     private fun getExtra() {
         mBookJson = intent?.getStringExtra(EXTRA_BOOK_ADD_TO_SHELVES)
-
         mBookJson?.let {
-            mBook = Gson().fromJson(it, BookVO::class.java)
+            mPresenter.getBookExtra(Gson().fromJson(it, BookVO::class.java))
         }
-    }
-
-    private fun requestData() {
-        mShelfModel.getAllShelves()
-            ?.observe(this) {
-                mAddToShelvesAdapter.setNewData(it)
-            }
     }
 
     private fun setUpListener() {
         btnClose.setOnClickListener {
-            finish()
+            mPresenter.onTapCloseButton()
         }
 
         btnAddToShelves.setOnClickListener {
-            mShelfList.forEach { shelf ->
-                mBook?.let { book ->
-                    if (shelf.books?.contains(book) == false) {
-                        shelf.books.add(book)
-                    }
-                    mShelfModel.insertShelf(shelf)
-                }
-            }
-            super.onBackPressed()
+            mPresenter.onTapAddToShelfButton()
         }
     }
 
     private fun setUpRecyclerView() {
-        mAddToShelvesAdapter = AddToShelvesAdapter(this)
+        mAddToShelvesAdapter = AddToShelvesAdapter(mPresenter)
         rvAddToShelves.adapter = mAddToShelvesAdapter
         rvAddToShelves.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
-    override fun onCheckedCheckbox(shelf: ShelfVO, isChecked: Boolean) {
-        if (isChecked) {
-            mShelfList.add(shelf)
-        } else {
-            mShelfList.remove(shelf)
-        }
+    override fun showShelfList(shelfList: List<ShelfVO>) {
+        mAddToShelvesAdapter.setNewData(shelfList)
+    }
+
+    override fun closeAddToShelfScreen() {
+        finish()
+    }
+
+    override fun onBackScreen() {
+        super.onBackPressed()
+    }
+
+    override fun showError(errorString: String) {
+        Snackbar.make(window.decorView, errorString, Snackbar.LENGTH_LONG).show()
     }
 }
