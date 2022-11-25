@@ -31,14 +31,14 @@
                 android:id="@+id/tvTitleInCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="More Like Fingersmith"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_regular_3x"
-                android:textColor="@color/black"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="@dimen/margin_medium_2"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:maxLines="1"
-                android:layout_centerInParent="true"/>
+                android:text="More Like Fingersmith"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_regular_3x"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

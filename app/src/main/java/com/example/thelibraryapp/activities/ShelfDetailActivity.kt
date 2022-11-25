@@ -106,6 +106,8 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
             dialog.show()
 
             dialog.tvRenameShelf.setOnClickListener {
+                etShelfName.requestFocus()
+                etShelfName.visibility = View.VISIBLE
                 dialog.dismiss()
 
                 if (tvShelfName.visibility == View.VISIBLE) {
