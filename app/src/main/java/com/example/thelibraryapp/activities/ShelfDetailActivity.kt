@@ -86,6 +86,7 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
     private fun bindData() {
         tvShelfName.text = mShelf?.title
         etShelfName.setText(mShelf?.title)
+        etShelfName.setText("")
         etShelfName.requestFocus()
         etShelfName.isCursorVisible = true
         tvBookCount.text = mShelf?.books?.count().toString() + " books"
@@ -106,9 +107,9 @@ class ShelfDetailActivity : AppCompatActivity(), BookOptionDelegate, BookViewHol
             dialog.show()
 
             dialog.tvRenameShelf.setOnClickListener {
-                etShelfName.requestFocus()
                 etShelfName.visibility = View.VISIBLE
                 dialog.dismiss()
+                etShelfName.requestFocus()
 
                 if (tvShelfName.visibility == View.VISIBLE) {
                     tvShelfName.visibility = View.GONE

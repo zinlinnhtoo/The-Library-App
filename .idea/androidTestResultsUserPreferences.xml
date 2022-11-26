@@ -82,6 +82,7 @@
                   <entry key="2529e22ce00c7ece" value="120" />
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
+                  <entry key="samsung" value="120" />
                   <entry key="samsung&#10; SM-N960F" value="120" />
                 </map>
               </option>
@@ -103,6 +104,20 @@
           </value>
         </entry>
         <entry key="-1157760970">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="2529e22ce00c7ece" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-N960F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="-975784744">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
@@ -144,7 +159,35 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="840997610">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="2529e22ce00c7ece" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-N960F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="1007974337">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="2529e22ce00c7ece" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-N960F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1169188760">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
@@ -187,6 +230,20 @@
           </value>
         </entry>
         <entry key="1468075688">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="2529e22ce00c7ece" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-N960F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1483347976">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">

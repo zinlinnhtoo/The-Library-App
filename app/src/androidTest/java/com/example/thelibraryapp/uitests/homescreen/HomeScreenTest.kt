@@ -67,6 +67,12 @@ class HomeScreenTest {
                 3, scrollTo()
             )
         )
+
+        onView(second(withId(R.id.rvBookList), 3)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<BookListViewHolder>(
+                2, click()
+            )
+        )
     }
 
     @Test
@@ -77,6 +83,6 @@ class HomeScreenTest {
     @Test
     fun goToLibraryAndCheckBookList() {
         onView(withId(R.id.action_library)).perform(click())
-        onView(withId(R.id.rvSmallGrid)).check(matches(hasChildCount(2)))
+        onView(withId(R.id.rvSmallGrid)).check(matches(hasChildCount(3)))
     }
 }

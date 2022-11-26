@@ -76,14 +76,14 @@ class ShelfScreenTest {
             )
         )
         onView(withId(R.id.ivBtnOption)).perform(click())
-        onView(withId(R.id.llRenameShelf)).perform(click())
+        Thread.sleep(1000L)
+        onView(withId(R.id.tvRenameShelf)).perform(click())
         onView(withId(R.id.etShelfName)).perform(
             ViewActions.typeText(
                 "Renamed Shelf"
             ), ViewActions.pressImeActionButton()
         )
-
-        onView(withId(R.id.ivBtnBack)).perform(click())
+//        onView(withId(R.id.ivBtnBack)).perform(click())
         onView(first<View>(withId(R.id.tvShelfTitle))).check(matches(
             ViewMatchers.withText(
                 "Renamed Shelf"
