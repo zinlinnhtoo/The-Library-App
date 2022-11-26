@@ -34,11 +34,7 @@ class ShelfScreenTest {
     fun goToShelfScreen() {
         onView(withId(R.id.action_library)).perform(click())
         onView(ViewMatchers.withText("Your shelves")).perform(click())
-    }
 
-    @Test
-    fun createShelf() {
-        goToShelfScreen()
         onView(withId(R.id.tvCreateShelf)).perform(click())
         onView(withId(R.id.etShelfName)).perform(
             ViewActions.typeText(
@@ -50,11 +46,8 @@ class ShelfScreenTest {
                 ViewMatchers.isDisplayed()
             )
         )
-    }
 
-    @Test
-    fun addToShelf() {
-        onView(withId(R.id.action_library)).perform(click())
+        onView(ViewMatchers.withText("Your books")).perform(click())
         onView(first<View>(withId(R.id.ivOptionSmallGrid))).perform(click())
         onView(withId(R.id.llAddToShelves)).perform(click())
         onView(first<View>(withId(R.id.cbAddToShelf))).perform(click())
@@ -65,11 +58,7 @@ class ShelfScreenTest {
                 ViewMatchers.withText("1 books")
             )
         )
-    }
 
-    @Test
-    fun renameShelf() {
-        goToShelfScreen()
         onView(withId(R.id.rvShelf)).perform(
             RecyclerViewActions.actionOnItemAtPosition<ShelfViewHolder>(
                 0, click()
@@ -89,11 +78,6 @@ class ShelfScreenTest {
                 "Renamed Shelf"
             )
         ))
-    }
-
-    @Test
-    fun deleteShelf() {
-        goToShelfScreen()
         onView(withId(R.id.rvShelf)).perform(
             RecyclerViewActions.actionOnItemAtPosition<ShelfViewHolder>(
                 0, click()
@@ -102,4 +86,28 @@ class ShelfScreenTest {
         onView(withId(R.id.ivBtnOption)).perform(click())
         onView(withId(R.id.llDeleteShelf)).perform(click())
     }
+
+//    @Test
+//    fun createShelf() {
+//        goToShelfScreen()
+//
+//    }
+
+//    @Test
+//    fun addToShelf() {
+//        onView(withId(R.id.action_library)).perform(click())
+//
+//    }
+
+//    @Test
+//    fun renameShelf() {
+//        goToShelfScreen()
+//
+//    }
+
+//    @Test
+//    fun deleteShelf() {
+//        goToShelfScreen()
+//
+//    }
 }

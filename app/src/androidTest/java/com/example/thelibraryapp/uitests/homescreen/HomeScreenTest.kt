@@ -33,13 +33,9 @@ class HomeScreenTest {
 
     @Test
     fun carouselViewEmptyAndInitialTest() {
+        Thread.sleep(3000L)
         onView(withId(R.id.rvBannerBook)).check(matches(hasChildCount(0)))
         onView(first<View>(withText("THE BOYS FROM BILOXI"))).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun scrollBookListAndClick() {
-
         onView(first(withId(R.id.rvBookList))).perform(
             RecyclerViewActions.actionOnItemAtPosition<BookListViewHolder>(
                 0, click()
@@ -73,16 +69,28 @@ class HomeScreenTest {
                 2, click()
             )
         )
-    }
 
-    @Test
-    fun checkCarouselAfterTapBook() {
+        onView(isRoot()).perform(ViewActions.pressBack())
+
         onView(withId(R.id.rvBannerBook)).check(matches(hasChildCount(2)))
-    }
 
-    @Test
-    fun goToLibraryAndCheckBookList() {
         onView(withId(R.id.action_library)).perform(click())
         onView(withId(R.id.rvSmallGrid)).check(matches(hasChildCount(3)))
     }
+
+//    @Test
+//    fun scrollBookListAndClick() {
+//
+//
+//    }
+//
+//    @Test
+//    fun checkCarouselAfterTapBook() {
+//
+//    }
+//
+//    @Test
+//    fun goToLibraryAndCheckBookList() {
+//
+//    }
 }
