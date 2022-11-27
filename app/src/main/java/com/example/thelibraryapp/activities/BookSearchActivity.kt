@@ -2,17 +2,17 @@ package com.example.thelibraryapp.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thelibraryapp.R
 import com.example.thelibraryapp.adapters.BookSearchAdapter
-import com.example.thelibraryapp.data.models.BookModel
-import com.example.thelibraryapp.data.models.BookModelImpl
 import com.example.thelibraryapp.data.vos.BookVO
-import com.example.thelibraryapp.delegates.BookViewHolderDelegate
+import com.example.thelibraryapp.mvp.presenters.BookSearchPresenter
+import com.example.thelibraryapp.mvp.presenters.BookSearchPresenterImpl
+import com.example.thelibraryapp.mvp.views.BookSearchView
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -20,11 +20,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_book_search.*
 import java.util.concurrent.TimeUnit
 
-class BookSearchActivity : AppCompatActivity(), BookViewHolderDelegate {
+class BookSearchActivity : AppCompatActivity(), BookSearchView {
 
     private lateinit var mBookSearchAdapter: BookSearchAdapter
-
-    private var mBookModel: BookModel = BookModelImpl
+    private lateinit var mPresenter: BookSearchPresenter
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -35,10 +34,8 @@ class BookSearchActivity : AppCompatActivity(), BookViewHolderDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_search)
-
-        mBookSearchAdapter = BookSearchAdapter(this)
-        rvSearchBook.adapter = mBookSearchAdapter
-        rvSearchBook.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        setUpPresenter()
+        setUpRecyclerView()
 
 //        etSearch.textChanges().debounce(500L, TimeUnit.MILLISECONDS).subscribe {
 //            mBookModel.searchGoogleBook(it.toString())
@@ -55,23 +52,40 @@ class BookSearchActivity : AppCompatActivity(), BookViewHolderDelegate {
 
         etSearch.textChanges()
             .debounce(500L, TimeUnit.MILLISECONDS)
-            .flatMap { mBookModel.searchGoogleBook(it.toString()) }
+            .flatMap { mPresenter.onSearchTextChanges(it.toString()) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {
-                Log.println(Log.INFO, "search book", it.toString())
-                mBookSearchAdapter.setNewData(it)
+                mPresenter.onSearchBookList(it)
+
             }, {
-                Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                mPresenter.onThrowableError(it.localizedMessage.orEmpty())
             })
+
+        mPresenter.onUiReady(this)
     }
 
-    override fun onTapBook(book: BookVO) {
+    private fun setUpRecyclerView() {
+        mBookSearchAdapter = BookSearchAdapter(mPresenter)
+        rvSearchBook.adapter = mBookSearchAdapter
+        rvSearchBook.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun setUpPresenter() {
+        mPresenter = ViewModelProvider(this)[BookSearchPresenterImpl::class.java]
+        mPresenter.initView(this)
+    }
+
+    override fun showSearchedBookList(bookList: List<BookVO>) {
+        mBookSearchAdapter.setNewData(bookList)
+    }
+
+    override fun navigateToBookDetail(book: BookVO) {
         val bookJson = Gson().toJson(book)
         startActivity(BookDetailActivity.newIntent(this, bookJson))
+    }
 
-        mBookModel.insertBook(book) {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
+    override fun showError(errorString: String) {
+        Snackbar.make(window.decorView, errorString, Snackbar.LENGTH_LONG).show()
     }
 }
