@@ -84,7 +84,9 @@ class ShelfScreenTest {
             )
         )
         onView(withId(R.id.ivBtnOption)).perform(click())
-        onView(withId(R.id.llDeleteShelf)).perform(click())
+        Thread.sleep(1000L)
+        onView(withId(R.id.tvDeleteShelf)).perform(click())
+        onView(withId(R.id.rvShelf)).check(matches(ViewMatchers.hasChildCount(0)))
     }
 
 //    @Test
