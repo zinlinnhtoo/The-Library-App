@@ -19,7 +19,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class BookDetailTest {
+class BookDetailPresenterTest {
     private val activityRule = ActivityTestRule(HomeActivity::class.java)
 
     @Before
